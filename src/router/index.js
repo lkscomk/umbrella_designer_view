@@ -30,6 +30,20 @@ const routes = [
     component: function () {
       return import('../views/AboutView.vue')
     }
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: function () {
+      return import('../views/login/index.vue')
+    }
+  },
+  {
+    path: '/pedido',
+    name: 'pedido',
+    component: function () {
+      return import('../views/pedido/index.vue')
+    }
   }
 ]
 
