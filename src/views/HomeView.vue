@@ -6,7 +6,7 @@
 import HelloWorld from '../components/HelloWorld'
 
 export default {
-  name: 'homeTela',
+  name: 'telaHome',
 
   components: {
     HelloWorld

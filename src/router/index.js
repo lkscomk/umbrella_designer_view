@@ -6,6 +6,20 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/escolher-designer',
+    name: 'escolherDesigner',
+    component: function () {
+      return import('../views/escolher_designer/index.vue')
+    }
+  },
+  {
+    path: '/cadastro',
+    name: 'cadastro',
+    component: function () {
+      return import('../views/cadastro/index.vue')
+    }
+  },
+  {
     path: '/',
     name: 'home',
     component: HomeView
