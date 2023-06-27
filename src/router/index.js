@@ -5,6 +5,13 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/tela-designer',
+    name: 'telaEnviadoDesigner',
+    component: function () {
+      return import('../views/tela_enviado_designer/index.vue')
+    }
+  },
+  {
     path: '/tela-principal',
     name: 'telaprincipal',
     component: function () {
