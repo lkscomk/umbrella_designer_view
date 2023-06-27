@@ -29,6 +29,20 @@
         </v-col>
       </v-row>
     </v-container>
+        <v-col cols="6">
+          <v-card-title>Opa! Seu pedido foi encaminhado para...</v-card-title>
+        </v-col>
+
+        <v-card flat>
+          <v-icon
+            size="150"
+            color="black"
+          >
+            mdi-account
+          </v-icon>
+        </v-card>
+    </v-row>
+  </v-container>
   </v-main>
 </template>
 

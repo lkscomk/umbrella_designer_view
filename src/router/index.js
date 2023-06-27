@@ -5,6 +5,27 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/tela-principal',
+    name: 'telaprincipal',
+    component: function () {
+      return import('../views/telaPrincipal/index.vue')
+    }
+  },
+  {
+    path: '/escolher-designer',
+    name: 'escolherDesigner',
+    component: function () {
+      return import('../views/escolher_designer/index.vue')
+    }
+  },
+  {
+    path: '/cadastro',
+    name: 'cadastro',
+    component: function () {
+      return import('../views/cadastro/index.vue')
+    }
+  },
+  {
     path: '/',
     component: () => import('@/layout/'),
     children: [
