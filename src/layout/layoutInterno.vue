@@ -16,6 +16,7 @@
     </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"
+      temporary
       app
     >
       <v-list
@@ -47,6 +48,10 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
+
+    <v-container fluid class="ma-0 pa-0">
+      <router-view/>
+    </v-container>
   </v-main>
 </template>
 

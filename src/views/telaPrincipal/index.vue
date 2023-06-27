@@ -1,6 +1,5 @@
 <template>
   <v-main>
-    <nav-bar/>
     <v-container fluid>
     <v-row  class="mt-5 d-flex justify-center align-center">
       <v-col cols="12" sm="8" md="4">
@@ -12,13 +11,8 @@
 </template>
 
 <script>
-import navBar from '@/components/nav_bar.vue'
 
 export default {
-  name: 'telaHome',
-
-  components: {
-    navBar
-  }
+  name: 'telaHome'
 }
 </script>

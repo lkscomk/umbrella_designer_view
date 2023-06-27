@@ -1,10 +1,12 @@
 <template>
   <v-container fluid>
-    <v-row align="center" justify="center" class="mt-5">
-      <v-col cols="12" sm="8" md="4">
-        <v-img :src="require('@/assets/logoUmbrella.png')" class="my-3" contain height="150" />
-        <v-card-title class="text-center d-flex justify-center bold-label">Login</v-card-title>
-        <v-card>
+    <v-row class="ma-0 pa-0 d-flex justify-center">
+      <v-col cols="4">
+        <v-col cols="12" class="d-flex justify-center">
+            <v-img max-width="400" src="@/assets/logotipo.png"></v-img>
+          </v-col>
+          <v-card flat width="1200">
+            <v-card-title class="d-flex justify-center pa-0">Login</v-card-title>
           <v-card-text>
             <v-form ref="form" @submit.prevent="login">
               <v-text-field v-model="email" label="Email" outlined></v-text-field>
