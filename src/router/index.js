@@ -70,6 +70,13 @@ const routes = [
         component: function () {
           return import('../views/pedido/index.vue')
         }
+      },
+      {
+        path: '/finalizar-pedido',
+        name: 'finalizar-pedido',
+        component: function () {
+          return import('../views/finalizar_pedido/index.vue')
+        }
       }
     ]
   }
