@@ -12,6 +12,20 @@ const routes = [
     }
   },
   {
+    path: '/portfolio',
+    name: 'portfolio',
+    component: function () {
+      return import('../views/portfolio/index.vue')
+    }
+  },
+  {
+    path: '/meus-pedidos',
+    name: 'meusPedidos',
+    component: function () {
+      return import('../views/meus_pedidos/index.vue')
+    }
+  },
+  {
     path: '/escolher-designer',
     name: 'escolherDesigner',
     component: function () {
