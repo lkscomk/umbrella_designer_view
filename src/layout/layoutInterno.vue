@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-app>
     <v-app-bar
       app
       color="primary"
@@ -23,13 +23,13 @@
             </v-list-item-avatar>
           </template>
 
-          <v-card>
+          <v-card width="220">
             <v-card-title class="subtitle justify-center mb-3">
-              ogin
+              Marina Reginato
             </v-card-title>
 
             <v-card-subtitle>
-              ome
+              marinareginalva@gmail.com
             </v-card-subtitle>
 
             <v-divider class="mb-1" />
@@ -88,9 +88,9 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-container fluid class="ma-0 pa-0">
+    <v-main>
       <router-view/>
-    </v-container>
+    </v-main>
 
     <v-footer
       :color="$vuetify.theme.dark
@@ -116,7 +116,7 @@
         </span>
       </v-col>
     </v-footer>
-  </v-main>
+  </v-app>
 </template>
 
 <script>
