@@ -19,13 +19,6 @@ const routes = [
     }
   },
   {
-    path: '/portfolio',
-    name: 'portfolio',
-    component: function () {
-      return import('../views/portfolio/index.vue')
-    }
-  },
-  {
     path: '/meus-pedidos',
     name: 'meusPedidos',
     component: function () {
@@ -76,6 +69,13 @@ const routes = [
         name: 'about',
         component: function () {
           return import('../views/AboutView.vue')
+        }
+      },
+      {
+        path: '/portfolio',
+        name: 'portfolio',
+        component: function () {
+          return import('../views/portfolio/index.vue')
         }
       },
       {
