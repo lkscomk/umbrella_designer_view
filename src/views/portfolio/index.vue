@@ -1,10 +1,6 @@
 <template>
-  <v-main>
     <v-container fluid>
-      <v-row align="center" justify="center" class="mt-5">
-        <v-col cols="10">
-          <v-card flat width="1200">
-            <v-row>
+      <v-row class="mt-5">
             <v-col cols="6" class="d-flex justify-end">
               <div style="border-radius: 50%; width: 150px; height: 150px;">
                 <v-icon size="150" color="black">mdi-account</v-icon>
@@ -24,15 +20,30 @@
             <v-col cols="6" class="d-flex justify-end pt-12">
               <v-btn type="submit" color="primary" class="my-3">Buscar outro&nbsp;<v-icon>mdi-reload</v-icon></v-btn>
             </v-col>
-            <v-col cols="6 pt-12">
+            <v-col cols="6" class="d-flex justify-start pt-12">
               <v-btn type="submit" color="success" class="my-3">Prosseguir&nbsp;<v-icon>mdi-chevron-right</v-icon></v-btn>
             </v-col>
-            </v-row>
-          </v-card>
-        </v-col>
+
+            <v-col cols="3">
+              <v-img max-width="600" src="@/assets/imagem1.jpg"></v-img>
+            </v-col>
+            <v-col cols="3">
+              <v-img max-width="600" src="@/assets/imagem2.jpg"></v-img>
+            </v-col>
+            <v-col cols="3">
+              <v-img max-width="600" src="@/assets/imagem3.jpg"></v-img>
+            </v-col>
+            <v-col cols="3">
+              <v-img max-width="600" src="@/assets/imagem4.jpg"></v-img>
+            </v-col>
+            <v-col cols="3">
+              <v-img max-width="600" src="@/assets/imagem5.jpg"></v-img>
+            </v-col>
+            <v-col cols="12" class="d-flex justify-end pt-12">
+              <v-btn type="submit" color="error" class="my-3"><v-icon>mdi-chevron-left</v-icon>&nbsp;Voltar</v-btn>
+            </v-col>
       </v-row>
     </v-container>
-  </v-main>
 </template>
 
 <script>
