@@ -41,13 +41,13 @@ const routes = [
   },
   {
     path: '/',
-    component: () => import('@/layout/'),
+    component: () => import('@/layout/layoutExterno.vue'),
     children: [
       {
-        path: '/escolher-designer',
-        name: 'escolherDesigner',
+        path: '/',
+        name: 'home',
         component: function () {
-          return import('../views/escolher_designer/index.vue')
+          return import('../views/home/index.vue')
         }
       },
       {
@@ -58,10 +58,51 @@ const routes = [
         }
       },
       {
-        path: '/',
-        name: 'home',
+        path: '/login',
+        name: 'login',
         component: function () {
-          return import('../views/home/index.vue')
+          return import('../views/login/index.vue')
+        }
+      }
+    ]
+  },
+  {
+    path: '/',
+    component: () => import('@/layout/layoutInterno.vue'),
+    children: [
+      {
+        path: '/tela-principal',
+        name: 'telaprincipal',
+        component: function () {
+          return import('../views/telaPrincipal/index.vue')
+        }
+      },
+      {
+        path: '/tela-designer',
+        name: 'telaEnviadoDesigner',
+        component: function () {
+          return import('../views/tela_enviado_designer/index.vue')
+        }
+      },
+      {
+        path: '/portfolio',
+        name: 'portfolio',
+        component: function () {
+          return import('../views/portfolio/index.vue')
+        }
+      },
+      {
+        path: '/meus-pedidos',
+        name: 'meusPedidos',
+        component: function () {
+          return import('../views/meus_pedidos/index.vue')
+        }
+      },
+      {
+        path: '/escolher-designer',
+        name: 'escolherDesigner',
+        component: function () {
+          return import('../views/escolher_designer/index.vue')
         }
       },
       {

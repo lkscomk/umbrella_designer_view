@@ -7,11 +7,11 @@
     >
       <div class="d-flex align-center">
         <v-img
-          class="shrink mr-2"
+          class="shrink mx-2"
           contain
-          src="@/assets/logoUmbrella.png"
+          src="@/assets/nav_bar_icon.png"
           transition="scale-transition"
-          width="170"
+          width="50"
         />
       </div>
 

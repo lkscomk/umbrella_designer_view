@@ -1,10 +1,6 @@
 <template>
-  <v-main>
-    <v-container fluid>
-      <v-row align="center" justify="center" class="mt-5">
-        <v-col cols="10">
-          <v-card flat width="1200">
-            <v-row>
+    <v-container fluid class="fill-height d-flex align-center justify-center">
+      <v-row class="ma-0 pa-0 d-flex justify-center">
             <v-col cols="12" class= "text-h4 font-weight-bold d-flex justify-center pb-6 primary--text">Opa! Seu pedido foi encaminhado para...</v-col>
             <v-col cols="6" class="d-flex justify-end">
               <div style="border-radius: 50%; width: 150px; height: 150px;">
@@ -29,11 +25,7 @@
               <v-btn type="submit" color="success" class="my-3">Prosseguir&nbsp;<v-icon>mdi-chevron-right</v-icon></v-btn>
             </v-col>
             </v-row>
-          </v-card>
-        </v-col>
-      </v-row>
   </v-container>
-  </v-main>
 </template>
 
 <script>
