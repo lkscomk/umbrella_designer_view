@@ -3,10 +3,13 @@ import App from './App.vue'
 import '@/plugins/dayjs'
 import router from './router'
 import store from './store'
+// import '@/plugins/validate'
 import vuetify from './plugins/vuetify'
 import '@mdi/font/css/materialdesignicons.css'
 
 Vue.config.productionTip = false
+
+Vue.component('date-selector', () => import('./components/dataSelecionar'))
 
 new Vue({
   router,

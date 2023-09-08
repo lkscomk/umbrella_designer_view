@@ -5,10 +5,18 @@
       color="primary"
       dark
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer">
-      </v-app-bar-nav-icon>
-
-      <v-spacer></v-spacer>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <div class="d-flex align-center">
+        <v-img
+          class="shrink mx-2"
+          contain
+          src="@/assets/logoUmbrellaBranca.png"
+          transition="scale-transition"
+          width="120"
+          @click="abrirJenela('/tela-principal')"
+        />
+      </div>
+      <v-spacer />
 
       <div class="d-flex d-inline-flex pl-2">
         <v-menu
@@ -19,7 +27,7 @@
         >
           <template v-slot:activator="{ on }">
             <v-list-item-avatar v-on="on">
-              <v-img src="https://randomuser.me/api/portraits/women/85.jpg"></v-img>
+              <v-img src="https://randomuser.me/api/portraits/women/85.jpg" />
             </v-list-item-avatar>
           </template>
 
@@ -40,6 +48,7 @@
                   ? ''
                   : 'primary'"
                 block
+                @click="abrirJenela('/login')"
               >
                 <v-icon
                   left
@@ -66,11 +75,17 @@
           v-model="group"
           active-class="deep-purple--text text--accent-4"
         >
-          <v-list-item>
+          <v-list-item @click="abrirJenela('/pedido')">
             <v-list-item-title>Fazer Pedido</v-list-item-title>
           </v-list-item>
-          <v-list-item>
+          <v-list-item @click="abrirJenela('/meus-pedidos')">
             <v-list-item-title>Histórico de Pedidos</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title @click="abrirJenela('/portfolio')">
+              Meu Portfolio
+            </v-list-item-title>
           </v-list-item>
 
           <v-list-item>
@@ -89,7 +104,7 @@
     </v-navigation-drawer>
 
     <v-main>
-      <router-view/>
+      <router-view />
     </v-main>
 
     <v-footer
@@ -149,6 +164,13 @@ export default {
       setTimeout(() => {
         this.atualizarData()
       }, 1000)
+    },
+    abrirJenela (tela) {
+      const route = this.$router.resolve({ path: tela })
+
+      if (tela) {
+        this.$router.push(route.href)
+      }
     }
   }
 }

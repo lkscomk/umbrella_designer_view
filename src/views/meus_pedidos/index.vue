@@ -2,19 +2,19 @@
   <v-main>
     <v-container fluid>
       <v-data-table
-      dense
-      :headers="headers"
-      :items="desserts"
-      item-key="name"
-      class="elevation-1"
-      ></v-data-table>
+        dense
+        :headers="headers"
+        :items="desserts"
+        item-key="name"
+        class="elevation-1"
+      />
     </v-container>
   </v-main>
 </template>
 
 <script>
 export default {
-  name: 'telaMeusPedidos',
+  name: 'TelaMeusPedidos',
   data: () => ({
     desserts: [
       {

@@ -12,70 +12,57 @@
           src="@/assets/nav_bar_icon.png"
           transition="scale-transition"
           width="50"
+          @click="abrirJenela('/')"
         />
       </div>
 
-      <v-spacer></v-spacer>
+      <v-spacer />
 
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
+        href="#home"
         text
         color="primary"
       >
         <span class="mr-2">HOME</span>
       </v-btn>
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
+        href="#sobre"
         text
         color="primary"
       >
         <span class="mr-2">SOBRE</span>
       </v-btn>
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
+        href="#perfis"
         text
         color="primary"
       >
         <span class="mr-2">PERFIS</span>
       </v-btn>
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
+        href="#quemSomos"
         text
         color="primary"
       >
-        <span class="mr-2">ACOMPANHE</span>
+        <span class="mr-2">QUEM SOMOS</span>
       </v-btn>
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
         text
         color="primary"
-      >
-        <span class="mr-2">PERFIS</span>
-      </v-btn>
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-        color="primary"
+        @click="abrirJenela('/cadastro')"
       >
         <span class="mr-2">Cadastre - se</span>
       </v-btn>
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
         color="primary"
+        @click="abrirJenela('/login')"
       >
         <span class="mr-2">LOGIN</span>
       </v-btn>
     </v-app-bar>
 
     <v-main>
-      <router-view/>
+      <router-view />
     </v-main>
   </v-app>
 </template>
@@ -83,10 +70,20 @@
 <script>
 
 export default {
-  name: 'layoutSitema',
+  name: 'LayoutSitema',
 
   data: () => ({
     //
-  })
+  }),
+
+  methods: {
+    abrirJenela (tela) {
+      const route = this.$router.resolve({ path: tela })
+
+      if (tela) {
+        this.$router.push(route.href)
+      }
+    }
+  }
 }
 </script>
