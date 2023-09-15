@@ -32,12 +32,12 @@
           </template>
 
           <v-card width="220">
-            <v-card-title class="subtitle justify-center mb-3">
-              Marina Reginato
+            <v-card-title class="subtitle mb-3">
+              {{ `${nome.split(' ')[0]} ${nome.split(' ')[1]}` }}
             </v-card-title>
 
             <v-card-subtitle>
-              marinareginalva@gmail.com
+              {{ email }}
             </v-card-subtitle>
 
             <v-divider class="mb-1" />
@@ -48,7 +48,7 @@
                   ? ''
                   : 'primary'"
                 block
-                @click="abrirJenela('/login')"
+                @click="deslogar()"
               >
                 <v-icon
                   left
@@ -127,7 +127,7 @@
           Umbrella Designer
         </strong>
         <span v-if="!$vuetify.breakpoint.mobile">
-          - Versão {{ versao }}
+          - Versão
         </span>
       </v-col>
     </v-footer>
@@ -135,6 +135,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
@@ -142,7 +143,9 @@ export default {
   data: () => ({
     dataAtual: '',
     drawer: false,
-    group: null
+    group: null,
+    nome: window.atob(localStorage.getItem('umbrella:nome')),
+    email: window.atob(localStorage.getItem('umbrella:email'))
   }),
 
   watch: {
@@ -158,6 +161,9 @@ export default {
   },
 
   methods: {
+    ...mapActions('app', [
+      'logout'
+    ]),
     atualizarData () {
       this.dataAtual = this.$day().format('dddd - DD - MMMM - YYYY HH:mm:ss')
 
@@ -166,11 +172,20 @@ export default {
       }, 1000)
     },
     abrirJenela (tela) {
-      const route = this.$router.resolve({ path: tela })
+      if (tela !== this.$router.currentRoute.path) {
+        const route = this.$router.resolve({ path: tela })
 
-      if (tela) {
-        this.$router.push(route.href)
+        if (tela) {
+          this.$router.push(route.href)
+        }
+      } else {
+        window.location.reload(true)
       }
+    },
+    deslogar () {
+      this.logout()
+      this.$router.push('/login')
+      this.$notificacao('Usuário desconectado com sucesso!')
     }
   }
 }

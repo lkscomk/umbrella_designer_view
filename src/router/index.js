@@ -21,13 +21,20 @@ const routes = [
       {
         path: '/login',
         name: 'login',
-        component: () => import('../views/login/index.vue'),
-        props: {
-          storeName: 'login',
-          storePath: '/views/login/store'
-        }
+        component: () => import('../views/login/index.vue')
       }
-    ]
+    ],
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('umbrella:token')) {
+        next('/tela-principal')
+      } else {
+        localStorage.removeItem('umbrella:token')
+        localStorage.removeItem('umbrella:nome')
+        localStorage.removeItem('umbrella:login')
+        localStorage.removeItem('umbrella:email')
+        next()
+      }
+    }
   },
   {
     path: '/',
@@ -68,7 +75,15 @@ const routes = [
         name: 'finalizar-pedido',
         component: () => import('../views/finalizar_pedido/index.vue')
       }
-    ]
+    ],
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('umbrella:token')) {
+        next()
+      } else {
+        Vue.prototype.$notificacao('Usuário não autenticado', 'atencao')
+        next('/login')
+      }
+    }
   }
 ]
 

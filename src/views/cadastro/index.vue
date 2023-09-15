@@ -25,75 +25,158 @@
             Cadastro
           </v-card-title>
           <v-card-text>
-            <v-row
-              align="center"
-              justify="center"
-              class="mt-5"
+            <v-form
+              ref="form"
+              @submit.prevent="''"
             >
-              <v-col cols="6">
-                <v-text-field
-                  v-model="formulario.nome"
-                  label="Nome"
-                  outlined
-                  hide-details
-                />
-              </v-col>
-              <v-col cols="6">
-                <v-text-field
-                  v-model="formulario.email"
-                  label="Email"
-                  outlined
-                  hide-details
-                />
-              </v-col>
-              <v-col cols="6">
-                <date-selector
-                  v-model="formulario.dataNascimento"
-                  hide-details
-                  label="Data de Nascimento"
-                  outlined
-                  readonly
-                  clearable
-                />
-              </v-col>
-              <v-col cols="6">
-                <v-text-field
-                  v-model="formulario.cpf"
-                  label="CPF"
-                  outlined
-                  hide-details
-                />
-              </v-col>
-              <v-col cols="6">
-                <v-text-field
-                  v-model="formulario.senha"
-                  label="Senha"
-                  outlined
-                  hide-details
-                  type="password"
-                />
-              </v-col>
-              <v-col cols="6">
-                <v-text-field
-                  v-model="formulario.confirmacaoSenha"
-                  label="Confirmação de Senha"
-                  outlined
-                  hide-details
-                  type="password"
-                />
-              </v-col>
-              <v-btn
-                type="submit"
-                color="primary"
-                class="my-3"
-                @click="abrirJenela('/login')"
-              >
-                ENTRAR
-              </v-btn>
-            </v-row>
-            <div class="text-center mt-3">
-              Já tem uma conta? <a @click="abrirJenela('/login')">Entre aqui</a>
-            </div>
+              <validation-observer ref="observer">
+                <v-container
+                  fluid
+                  grid-list-xs
+                >
+                  <v-row dense>
+                    <v-col cols="6">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="Nome"
+                        vid="nome"
+                        rules="required"
+                      >
+                        <v-text-field
+                          v-model="formulario.nome"
+                          :error-messages="errors"
+                          :hide-details="!errors.length"
+                          label="Nome"
+                          outlined
+                        />
+                      </validation-provider>
+                    </v-col>
+                    <v-col cols="6">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="Email"
+                        vid="email"
+                        rules="required|email"
+                      >
+                        <v-text-field
+                          v-model="formulario.email"
+                          :error-messages="errors"
+                          :hide-details="!errors.length"
+                          label="Email"
+                          outlined
+                        />
+                      </validation-provider>
+                    </v-col>
+                    <v-col cols="4">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="Data de Nascimento"
+                        vid="dataNascimento"
+                        rules="required"
+                      >
+                        <date-selector
+                          v-model="formulario.dataNascimento"
+                          :error-messages="errors"
+                          :hide-details="!errors.length"
+                          label="Data de Nascimento"
+                          outlined
+                          readonly
+                          clearable
+                        />
+                      </validation-provider>
+                    </v-col>
+                    <v-col cols="4">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="CPF"
+                        vid="cpf"
+                        rules="required|min:11|numeric"
+                      >
+                        <v-text-field
+                          v-model="formulario.cpf"
+                          :error-messages="errors"
+                          :hide-details="!errors.length"
+                          label="CPF"
+                          outlined
+                        />
+                      </validation-provider>
+                    </v-col>
+                    <v-col cols="4">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="Tipo de Usuário"
+                        vid="empresaOrigem"
+                        rules="required"
+                      >
+                        <v-autocomplete
+                          v-model="formulario.tipoUsuarioId"
+                          :items="dropdownTipoUsuarioRestrito"
+                          :error-messages="errors"
+                          :hide-details="!errors.length"
+                          item-value="item"
+                          item-text="descricao"
+                          label="Tipo de Usuário"
+                          class="required"
+                          outlined
+                        />
+                      </validation-provider>
+                    </v-col>
+                    <v-col cols="6">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="Senha"
+                        vid="senha"
+                        rules="required|min:8"
+                      >
+                        <v-text-field
+                          v-model="formulario.senha"
+                          :error-messages="errors"
+                          :hide-details="!errors.length"
+                          label="Senha"
+                          outlined
+                          type="password"
+                        />
+                      </validation-provider>
+                    </v-col>
+                    <v-col cols="6">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="Confirmação de Senha"
+                        vid="confirmacaoSenha"
+                        rules="required|min:8"
+                      >
+                        <v-text-field
+                          v-model="formulario.confirmacaoSenha"
+                          :error-messages="errors"
+                          :hide-details="!errors.length"
+                          label="Confirmação de Senha"
+                          outlined
+                          type="password"
+                        />
+                      </validation-provider>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      class="mt-3"
+                    >
+                      <v-btn
+                        color="primary"
+                        block
+                        class="rounded-button"
+                        @click="cadastrarUsuario()"
+                      >
+                        ENTRAR
+                      </v-btn>
+                    </v-col>
+                    <v-col cols="12">
+                      <div class="text-center mt-3">
+                        Já tem uma conta? <a @click="abrirJenela('/login')">Entre aqui</a>
+                      </div>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </validation-observer>
+            </v-form>
           </v-card-text>
         </v-card>
       </v-col>
@@ -102,6 +185,8 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+
 export default {
   name: 'TelaCadastro',
   data: () => ({
@@ -114,12 +199,48 @@ export default {
       confirmacaoSenha: null
     }
   }),
+  computed: {
+    ...mapState('cadastro', [
+      'dropdownTipoUsuarioRestrito'
+    ])
+  },
+  async created () {
+    await this.buscarDropdownTipoUsuarioRestrito(2) // TIPOS DE PERFIS
+  },
   methods: {
-    abrirJenela (tela) {
-      const route = this.$router.resolve({ path: tela })
+    ...mapActions('cadastro', [
+      'buscarDropdownTipoUsuarioRestrito',
+      'cadastrar'
+    ]),
+    async cadastrarUsuario () {
+      if (await this.$refs.observer.validate()) {
+        if (this.formulario.senha === this.formulario.confirmacaoSenha) {
+          const res = await this.cadastrar({
+            tipoUsuarioId: this.formulario.tipoUsuarioId || null,
+            dataNascimento: this.formulario.dataNascimento || null,
+            nome: this.formulario.nome || null,
+            email: this.formulario.email || null,
+            senha: this.formulario.senha || null,
+            cpf: this.formulario.cpf || null
+          })
 
-      if (tela) {
-        this.$router.push(route.href)
+          if (res && !res.erro) {
+            this.abrirJenela('/login')
+          }
+        } else {
+          this.$notificacao('As senhas devem ser iguais.', 'erro')
+        }
+      }
+    },
+    abrirJenela (tela) {
+      if (tela !== this.$router.currentRoute.path) {
+        const route = this.$router.resolve({ path: tela })
+
+        if (tela) {
+          this.$router.push(route.href)
+        }
+      } else {
+        window.location.reload(true)
       }
     }
   }

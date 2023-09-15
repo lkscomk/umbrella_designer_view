@@ -76,10 +76,14 @@ export default {
   name: 'TelaEscolherDesign',
   methods: {
     abrirJenela (tela) {
-      const route = this.$router.resolve({ path: tela })
+      if (tela !== this.$router.currentRoute.path) {
+        const route = this.$router.resolve({ path: tela })
 
-      if (tela) {
-        this.$router.push(route.href)
+        if (tela) {
+          this.$router.push(route.href)
+        }
+      } else {
+        window.location.reload(true)
       }
     }
   }

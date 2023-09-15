@@ -15,6 +15,7 @@
         :on="on"
         :disabled="disabled"
         :dense="dense"
+        :error-messages="errorMessages"
         :hide-details="hideDetails"
         :label="label"
         :outlined="outlined"
@@ -59,6 +60,10 @@ export default {
     dense: {
       default: false,
       type: Boolean
+    },
+    errorMessages: {
+      default: '',
+      type: [String, Array]
     },
     hideDetails: {
       default: false,

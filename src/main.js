@@ -1,10 +1,11 @@
 import '@/plugins/axios_local'
+import '@/plugins/notificacao'
 import Vue from 'vue'
 import App from './App.vue'
 import '@/plugins/dayjs'
 import router from './router'
 import store from './store'
-// import '@/plugins/validate'
+import '@/plugins/validate'
 import vuetify from './plugins/vuetify'
 import '@mdi/font/css/materialdesignicons.css'
 
