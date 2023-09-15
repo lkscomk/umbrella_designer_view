@@ -81,9 +81,18 @@
 }
 </style>
 <script>
+import { mapActions, mapState } from 'vuex'
+
 export default {
   name: 'HomeLogin',
+  computed: {
+    ...mapState('login', [
+    ])
+  },
   methods: {
+    ...mapActions('login', [
+      'login'
+    ]),
     abrirJenela (tela) {
       const route = this.$router.resolve({ path: tela })
 

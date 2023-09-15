@@ -6,7 +6,7 @@
     <v-row
       id="home"
       class="d-flex align-center justify-center pa-0 ma-0"
-      :style="`height: ${alturaTela}px;`"
+      :style="`min-height: ${alturaTela}px;`"
     >
       <v-col
         cols="6"
@@ -52,14 +52,39 @@
     <v-row
       id="o-que-e"
       class="pa-0 ma-0 color primaryHome"
-      :style="`height: ${alturaTela}px;`"
+      :style="`min-height: ${alturaTela}px;`"
     >
       <v-col
         cols="12"
         class="py-10 ma-0 d-flex align-center justify-center"
       >
         <v-img
+          v-if="$vuetify.breakpoint.name === 'xl'"
           max-width="600px"
+          contain
+          src="@/assets/logoUmbrellaBranca.png"
+        />
+        <v-img
+          v-else-if="$vuetify.breakpoint.name === 'lg'"
+          max-width="500px"
+          contain
+          src="@/assets/logoUmbrellaBranca.png"
+        />
+        <v-img
+          v-else-if="$vuetify.breakpoint.name === 'md'"
+          max-width="400px"
+          contain
+          src="@/assets/logoUmbrellaBranca.png"
+        />
+        <v-img
+          v-else-if="$vuetify.breakpoint.name === 'sm'"
+          max-width="300px"
+          contain
+          src="@/assets/logoUmbrellaBranca.png"
+        />
+        <v-img
+          v-else
+          max-width="200px"
           contain
           src="@/assets/logoUmbrellaBranca.png"
         />
@@ -107,8 +132,37 @@
         class="pa-0 ma-0 d-flex align-start justify-center"
       >
         <v-img
+          v-if="$vuetify.breakpoint.name === 'xl'"
           class="pa-0 ma-0 color "
           max-width="400px"
+          contain
+          src="@/assets/ideia.png"
+        />
+        <v-img
+          v-else-if="$vuetify.breakpoint.name === 'lg'"
+          class="pa-0 ma-0 color "
+          max-width="400px"
+          contain
+          src="@/assets/ideia.png"
+        />
+        <v-img
+          v-else-if="$vuetify.breakpoint.name === 'md'"
+          class="pa-0 ma-0 color "
+          max-width="300px"
+          contain
+          src="@/assets/ideia.png"
+        />
+        <v-img
+          v-else-if="$vuetify.breakpoint.name === 'sm'"
+          class="pa-0 ma-0 color "
+          max-width="200px"
+          contain
+          src="@/assets/ideia.png"
+        />
+        <v-img
+          v-else
+          class="pa-0 ma-0 color "
+          max-width="100px"
           contain
           src="@/assets/ideia.png"
         />
@@ -121,7 +175,7 @@
     <v-row
       id="sobre"
       class="pa-0 ma-0"
-      :style="`height: ${alturaTela}px;`"
+      :style="`min-height: ${alturaTela}px;`"
     >
       <v-col
         xl="1"
@@ -172,8 +226,37 @@
         class="pa-0 ma-0 d-flex justify-center"
       >
         <v-img
+          v-if="$vuetify.breakpoint.name === 'xl'"
           class="pa-0 ma-0 color "
           max-width="600px"
+          contain
+          src="@/assets/instagram.png"
+        />
+        <v-img
+          v-else-if="$vuetify.breakpoint.name === 'lg'"
+          class="pa-0 ma-0 color "
+          max-width="500px"
+          contain
+          src="@/assets/instagram.png"
+        />
+        <v-img
+          v-else-if="$vuetify.breakpoint.name === 'md'"
+          class="pa-0 ma-0 color "
+          max-width="400px"
+          contain
+          src="@/assets/instagram.png"
+        />
+        <v-img
+          v-else-if="$vuetify.breakpoint.name === 'sm'"
+          class="pa-0 ma-0 color "
+          max-width="300px"
+          contain
+          src="@/assets/instagram.png"
+        />
+        <v-img
+          v-else
+          class="pa-0 ma-0 color "
+          max-width="200px"
           contain
           src="@/assets/instagram.png"
         />
@@ -197,18 +280,19 @@
     </v-row>
     <v-row
       id="perfis"
-      class="d-flex pa-0 ma-0"
-      :style="`height: ${alturaTela}px;`"
+      class="pa-0 ma-0 d-flex justify-center"
+      :style="`min-height: ${alturaTela}px;`"
     >
       <v-col
-        xl="6"
-        lg="6"
-        md="6"
-        sm="6"
-        class="pa-0 ma-0 d-flex align-center justify-center"
+        xl="5"
+        lg="5"
+        md="5"
+        sm="12"
+        cols="12"
+        class="pa-0 ma-0 py-7 d-flex align-center justify-center"
       >
         <v-card
-          max-width="45%"
+          :max-width="$vuetify.breakpoint.name === 'xl' ? '60%' : $vuetify.breakpoint.name === 'lg' ? '60%' : $vuetify.breakpoint.name === 'md' ? '70%' : $vuetify.breakpoint.name === 'sm' ? '80%' : '90%'"
           color="primaryHome"
           class="hover-div rounded-xl"
         >
@@ -298,15 +382,15 @@
         </v-card>
       </v-col>
       <v-col
-        xl="6"
-        lg="6"
-        md="6"
-        sm="6"
+        xl="5"
+        lg="5"
+        md="5"
+        sm="12"
         cols="12"
-        class="pa-0 ma-0 d-flex align-center justify-center"
+        class="pa-0 ma-0 py-7 d-flex align-center justify-center"
       >
         <v-card
-          max-width="45%"
+          :max-width="$vuetify.breakpoint.name === 'xl' ? '60%' : $vuetify.breakpoint.name === 'lg' ? '60%' : $vuetify.breakpoint.name === 'md' ? '70%' : $vuetify.breakpoint.name === 'sm' ? '80%' : '90%'"
           color="secondaryHome"
           class="hover-div rounded-xl"
         >
@@ -398,19 +482,19 @@
     </v-row>
     <v-row
       class="d-flex pa-0 ma-0 color primaryHome d-flex align-center justify-center"
-      :style="`height: ${alturaTela}px;`"
+      :style="`min-height: ${alturaTela}px;`"
     >
-      <v-col cols="1" />
       <v-col
-        xl="11"
-        lg="11"
-        md="11"
-        sm="11"
-        class="pa-0 ma-0 py-10 d-flex align-center justify-start"
+        xl="12"
+        lg="12"
+        md="12"
+        sm="12"
+        class="pa-0 ma-0 py-10 px-5 d-flex align-center justify-center"
       >
         <span class="banner white--text">Olha o que você pode fazer!</span>
       </v-col>
       <v-col
+        v-if="$vuetify.breakpoint.name === 'xl' || $vuetify.breakpoint.name === 'lg'"
         xl="2"
         lg="2"
         md="2"
@@ -436,6 +520,7 @@
         </v-carousel>
       </v-col>
       <v-col
+        v-if="$vuetify.breakpoint.name === 'xl' || $vuetify.breakpoint.name === 'lg'"
         xl="2"
         lg="2"
         md="2"
@@ -463,8 +548,8 @@
       <v-col
         xl="4"
         lg="4"
-        md="4"
-        sm="4"
+        md="11"
+        sm="11"
       >
         <v-carousel
           hide-delimiter-background
@@ -485,6 +570,7 @@
         </v-carousel>
       </v-col>
       <v-col
+        v-if="$vuetify.breakpoint.name === 'xl' || $vuetify.breakpoint.name === 'lg'"
         xl="2"
         lg="2"
         md="2"
@@ -510,6 +596,7 @@
         </v-carousel>
       </v-col>
       <v-col
+        v-if="$vuetify.breakpoint.name === 'xl' || $vuetify.breakpoint.name === 'lg'"
         xl="2"
         lg="2"
         md="2"
@@ -548,24 +635,17 @@
     <v-row
       id="quemSomos"
       class="d-flex pa-0 ma-0 color white"
-      :style="`height: ${alturaTela}px;`"
+      :style="`min-height: ${alturaTela}px;`"
     >
-      <v-col cols="1" />
       <v-col
-        xl="11"
-        lg="11"
-        md="11"
-        sm="11"
-        class="pa-0 ma-0 py-8 d-flex"
+        cols="12"
+        class="pa-0 ma-0 py-8 px-5 d-flex justify-center"
       >
         <span class="banner primaryHome--text">Conheça nossa equipe!</span>
       </v-col>
       <v-col
-        xl="12"
-        lg="12"
-        md="12"
-        sm="12"
-        class="pa-0 ma-0 d-flex align-center justify-center"
+        cols="12"
+        class="pa-0 ma-0 pb-10 d-flex align-center justify-center"
       >
         <v-card
           width="70%"
@@ -588,16 +668,15 @@
     <v-row
       id="perfis"
       class="d-flex pa-0 ma-0 color primaryHome"
-      :style="`height: ${alturaTela-400}px;`"
+      :style="`min-height: ${alturaTela-400}px;`"
     >
-      <v-col cols="12" />
-      <v-col cols="1" />
       <v-col
         xl="7"
         lg="7"
-        md="7"
-        sm="7"
-        class="pa-0 ma-0 color"
+        md="12"
+        sm="12"
+        cols="12"
+        class="pa-0 ma-0 px-5 pt-10 d-flex- justify-center"
       >
         <v-row
           dense
@@ -608,6 +687,7 @@
             lg="4"
             md="4"
             sm="4"
+            cols="4"
             class="pa-0 ma-0 color "
           >
             <span class="tituloFooter white--text">Início</span>
@@ -617,6 +697,7 @@
             lg="4"
             md="4"
             sm="4"
+            cols="4"
             class="pa-0 ma-0 color "
           >
             <span class="tituloFooter white--text">Sobre nós</span>
@@ -626,6 +707,7 @@
             lg="4"
             md="4"
             sm="4"
+            cols="4"
             class="pa-0 ma-0 color "
           >
             <span class="tituloFooter white--text">Suporte</span>
@@ -635,6 +717,7 @@
             lg="4"
             md="4"
             sm="4"
+            cols="4"
             class="pa-0 ma-0 color "
           >
             <span class="subTitulosFooter white--text">Home</span>
@@ -644,6 +727,7 @@
             lg="4"
             md="4"
             sm="4"
+            cols="4"
             class="pa-0 ma-0 color "
           >
             <span class="subTitulosFooter white--text">Informações</span>
@@ -653,6 +737,7 @@
             lg="4"
             md="4"
             sm="4"
+            cols="4"
             class="pa-0 ma-0 color "
           >
             <span class="subTitulosFooter white--text">FAQ</span>
@@ -662,6 +747,7 @@
             lg="4"
             md="4"
             sm="4"
+            cols="4"
             class="pa-0 ma-0 color "
           >
             <span class="subTitulosFooter white--text">Sobre o site</span>
@@ -671,6 +757,7 @@
             lg="4"
             md="4"
             sm="4"
+            cols="4"
             class="pa-0 ma-0 color "
           >
             <span class="subTitulosFooter white--text">Contatos</span>
@@ -680,6 +767,7 @@
             lg="4"
             md="4"
             sm="4"
+            cols="4"
             class="pa-0 ma-0 color "
           >
             <span class="subTitulosFooter white--text">Chat</span>
@@ -689,6 +777,7 @@
             lg="4"
             md="4"
             sm="4"
+            cols="4"
             class="pa-0 ma-0 color "
           >
             <span class="subTitulosFooter white--text">Perfis</span>
@@ -698,6 +787,7 @@
             lg="4"
             md="4"
             sm="4"
+            cols="4"
             class="pa-0 ma-0 color "
           >
             <span class="subTitulosFooter white--text">Blog</span>
@@ -707,6 +797,7 @@
             lg="4"
             md="4"
             sm="4"
+            cols="4"
             class="pa-0 ma-0 color "
           >
             <span class="subTitulosFooter white--text">Política de privaciade</span>
@@ -767,28 +858,31 @@
       <v-col
         xl="4"
         lg="4"
-        md="4"
-        sm="4"
-        class="pa-0 ma-0 color"
+        md="12"
+        sm="12"
+        cols="12"
+        class="pa-0 ma-0 px-5 pt-10"
       >
         <v-row
           dense
-          class="pa-0 ma-0"
+          class="pa-0 ma-0 d-flex justify-center"
         >
           <v-col
             xl="12"
             lg="12"
             md="12"
             sm="12"
-            class="pa-0 ma-0 py-2 color"
+            cols="12"
+            class="pa-0 ma-0 py-2 d-flex justify-center"
           >
-            <span class="tituloFooter white--text">Envie sua dúvida:</span>
+            <span class="tituloFooter white--text">Envie sua dúvida</span>
           </v-col>
           <v-col
             xl="8"
             lg="8"
-            md="8"
-            sm="8"
+            md="10"
+            sm="12"
+            cols="12"
             class="pa-0 ma-0 py-2 color"
           >
             <v-text-field
@@ -804,8 +898,9 @@
           <v-col
             xl="8"
             lg="8"
-            md="8"
-            sm="8"
+            md="10"
+            sm="12"
+            cols="12"
             class="pa-0 ma-0 py-2 color"
           >
             <v-text-field
@@ -821,8 +916,9 @@
           <v-col
             xl="8"
             lg="8"
-            md="8"
-            sm="8"
+            md="10"
+            sm="12"
+            cols="12"
             class="pa-0 ma-0 py-2 color"
           >
             <v-textarea
@@ -838,8 +934,9 @@
           <v-col
             xl="8"
             lg="8"
-            md="8"
-            sm="8"
+            md="10"
+            sm="12"
+            cols="12"
             class="pa-0 ma-0 py-2 d-flex justify-end color"
           >
             <v-btn

@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <notificacao />
     <router-view />
   </v-app>
 </template>

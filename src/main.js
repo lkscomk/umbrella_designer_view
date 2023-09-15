@@ -1,3 +1,4 @@
+import '@/plugins/axios_local'
 import Vue from 'vue'
 import App from './App.vue'
 import '@/plugins/dayjs'
@@ -10,6 +11,7 @@ import '@mdi/font/css/materialdesignicons.css'
 Vue.config.productionTip = false
 
 Vue.component('date-selector', () => import('./components/dataSelecionar'))
+Vue.component('notificacao', () => import('./components/notificacao'))
 
 new Vue({
   router,
