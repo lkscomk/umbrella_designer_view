@@ -50,7 +50,7 @@
       </v-col>
     </v-row>
     <v-row
-      id="o-que-e"
+      id="quemSomos"
       class="pa-0 ma-0 color primaryHome"
       :style="`min-height: ${alturaTela}px;`"
     >
@@ -113,13 +113,33 @@
             cols="12"
             class="pa-0 ma-0 mb-5"
           >
-            <span class="titulo white--text">Quem somos?</span>
+            <span
+              class="titulo white--text"
+              :style="{
+                'font-size': $vuetify.breakpoint.smAndDown ? '30px' :
+                  $vuetify.breakpoint.mdAndDown ? '40px' :
+                  $vuetify.breakpoint.lgAndDown ? '50px' :
+                  '60px'
+              }"
+            >
+              Quem somos?
+            </span>
           </v-col>
           <v-col
             cols="12"
             class="pa-0 ma-0 mt-5"
           >
-            <span class="descricao white--text">A Umbrella Designer vem com a proposta de ajudar a conectar quem precisa de um banner a quem pode oferecer o serviço.</span>
+            <span
+              class="descricao white--text"
+              :style="{
+                'font-size': $vuetify.breakpoint.smAndDown ? '15px' :
+                  $vuetify.breakpoint.mdAndDown ? '20px' :
+                  $vuetify.breakpoint.lgAndDown ? '25px' :
+                  '30px'
+              }"
+            >
+              A Umbrella Designer vem com a proposta de ajudar a conectar quem precisa de um banner a quem pode oferecer o serviço.
+            </span>
           </v-col>
         </v-row>
       </v-col>
@@ -173,7 +193,7 @@
       />
     </v-row>
     <v-row
-      id="sobre"
+      id="banner"
       class="pa-0 ma-0"
       :style="`min-height: ${alturaTela}px;`"
     >
@@ -194,26 +214,64 @@
       >
         <v-row
           dense
-          class="pa-0 ma-0"
+          class="pa-0 ma-0 pl-5"
         >
           <v-col
             cols="12"
             class="pa-0 ma-0 py-10 d-flex align-center"
           >
-            <span class="banner primaryHome--text">Mas, o que é um banner?</span>
+            <span
+              class="banner primaryHome--text"
+              :style="{
+                'font-size': $vuetify.breakpoint.smAndDown ? '30px' :
+                  $vuetify.breakpoint.mdAndDown ? '40px' :
+                  $vuetify.breakpoint.lgAndDown ? '50px' :
+                  '60px'
+              }"
+            >
+              Mas, o que é um banner?
+            </span>
           </v-col>
           <v-col
+            class="pb-6"
             cols="12"
           >
-            <span class="sub-descricao primaryHome--text">Já entrou em uma rede social<br>de uma marca famosa e viu<br>aqueles publicações bonitas<br>mostrando os serviçoes ou<br>produtos que essa marca<br>oferece?</span>
+            <span
+              class="sub-descricao primaryHome--text"
+              :style="{
+                'font-size': $vuetify.breakpoint.smAndDown ? '15px' :
+                  $vuetify.breakpoint.mdAndDown ? '20px' :
+                  $vuetify.breakpoint.lgAndDown ? '25px' :
+                  '30px'
+              }"
+            >
+              Já entrou em uma rede social
+              <br>de uma marca famosa e viu
+              <br>aqueles publicações bonitas
+              <br>mostrando os serviçoes ou
+              <br>produtos que essa marca
+              <br>oferece?
+            </span>
           </v-col>
           <v-col
+            class="pt-6"
             cols="12"
           >
             <span
               class="sub-descricao primaryHome--text d-flex justify-end"
+              :style="{
+                'font-size': $vuetify.breakpoint.smAndDown ? '15px' :
+                  $vuetify.breakpoint.mdAndDown ? '20px' :
+                  $vuetify.breakpoint.lgAndDown ? '25px' :
+                  '30px'
+              }"
               style="text-align: right;"
-            >Com a Umbrella Designer<br>você pode ter seus próprios<br>banners, para sua empresa<br>ou pequeno negócio.</span>
+            >
+              Com a Umbrella Designer
+              <br>você pode ter seus próprios
+              <br>banners, para sua empresa
+              <br>ou pequeno negócio.
+            </span>
           </v-col>
         </v-row>
       </v-col>
@@ -235,28 +293,28 @@
         <v-img
           v-else-if="$vuetify.breakpoint.name === 'lg'"
           class="pa-0 ma-0 color "
-          max-width="500px"
+          max-width="550px"
           contain
           src="@/assets/instagram.png"
         />
         <v-img
           v-else-if="$vuetify.breakpoint.name === 'md'"
           class="pa-0 ma-0 color "
-          max-width="400px"
+          max-width="450px"
           contain
           src="@/assets/instagram.png"
         />
         <v-img
           v-else-if="$vuetify.breakpoint.name === 'sm'"
           class="pa-0 ma-0 color "
-          max-width="300px"
+          max-width="350px"
           contain
           src="@/assets/instagram.png"
         />
         <v-img
           v-else
           class="pa-0 ma-0 color "
-          max-width="200px"
+          max-width="300px"
           contain
           src="@/assets/instagram.png"
         />
@@ -272,7 +330,7 @@
         <v-btn
           rounded
           color="secondary"
-          x-large
+          :small="$vuetify.breakpoint.name === 'sm' || $vuetify.breakpoint.name === 'xs'"
         >
           CADASTRE - SE
         </v-btn>
@@ -313,8 +371,8 @@
               class="pa-0 ma-0"
             >
               <v-col
-                cols="1"
-                class="white--text "
+                cols="12"
+                class="white--text d-flex flex-row"
               >
                 <v-icon
                   class="d-flex justify-center pr-3"
@@ -323,16 +381,11 @@
                 >
                   mdi-umbrella
                 </v-icon>
+                <b>Solicite&nbsp;</b> o serviço um banner do jeito que desejar.
               </v-col>
               <v-col
-                cols="11"
-                class="white--text "
-              >
-                <b>Solicite </b> o serviço um banner do jeito que desejar.
-              </v-col>
-              <v-col
-                cols="1"
-                class="white--text"
+                cols="12"
+                class="white--text d-flex flex-row"
               >
                 <v-icon
                   class="d-flex justify-center pr-3"
@@ -341,16 +394,11 @@
                 >
                   mdi-umbrella
                 </v-icon>
+                <b>Escolha&nbsp;</b> como quer a sua arte em detalhes.
               </v-col>
               <v-col
-                cols="11"
-                class="white--text "
-              >
-                <b>Escolha</b> como quer a sua arte em detalhes.
-              </v-col>
-              <v-col
-                cols="1"
-                class="white--text "
+                cols="12"
+                class="white--text  d-flex flex-row"
               >
                 <v-icon
                   class="d-flex justify-center pr-3"
@@ -359,12 +407,7 @@
                 >
                   mdi-umbrella
                 </v-icon>
-              </v-col>
-              <v-col
-                cols="11"
-                class="white--text "
-              >
-                <b>Tenha </b> facilidade e agilidade no processo de obter seu design perfeito.
+                <b>Tenha&nbsp;</b> facilidade e agilidade no processo de obter seu design perfeito.
               </v-col>
               <v-col
                 cols="12"
@@ -372,6 +415,7 @@
               >
                 <v-btn
                   rounded
+                  :small="$vuetify.breakpoint.name === 'sm' || $vuetify.breakpoint.name === 'xs'"
                   color="secondary"
                 >
                   Cadastre - se como cliente!
@@ -411,8 +455,8 @@
               class="pa-0 ma-0"
             >
               <v-col
-                cols="1"
-                class="white--text "
+                cols="12"
+                class="white--text d-flex flex-row"
               >
                 <v-icon
                   class="d-flex justify-center pr-3"
@@ -421,16 +465,11 @@
                 >
                   mdi-umbrella
                 </v-icon>
+                <b>Escolha&nbsp;</b> o serviço que queria fazer.
               </v-col>
               <v-col
-                cols="11"
-                class="white--text"
-              >
-                <b>Escolha</b> o serviço que queria fazer.
-              </v-col>
-              <v-col
-                cols="1"
-                class="white--text"
+                cols="12"
+                class="white--text d-flex flex-row"
               >
                 <v-icon
                   class="d-flex justify-center pr-3"
@@ -439,16 +478,11 @@
                 >
                   mdi-umbrella
                 </v-icon>
+                <b>Trabalhe&nbsp;</b> que quiser, onde quiser.
               </v-col>
               <v-col
-                cols="11"
-                class="white--text "
-              >
-                <b>Trabalhe</b> que quiser, onde quiser.
-              </v-col>
-              <v-col
-                cols="1"
-                class="white--text "
+                cols="12"
+                class="white--text d-flex flex-row"
               >
                 <v-icon
                   class="d-flex justify-center pr-3"
@@ -457,12 +491,7 @@
                 >
                   mdi-umbrella
                 </v-icon>
-              </v-col>
-              <v-col
-                cols="11"
-                class="white--text "
-              >
-                <b>Seja</b> seu próprio chefe.
+                <b>Seja&nbsp;</b> seu próprio chefe.
               </v-col>
               <v-col
                 cols="12"
@@ -470,6 +499,7 @@
               >
                 <v-btn
                   rounded
+                  :small="$vuetify.breakpoint.name === 'sm' || $vuetify.breakpoint.name === 'xs'"
                   color="secondary"
                 >
                   Cadastre - se como designer!
@@ -481,6 +511,22 @@
       </v-col>
     </v-row>
     <v-row
+      id="login"
+      class="pa-0 ma-0 d-flex justify-center"
+      :style="`min-height: ${alturaTela}px;`"
+    >
+      <v-col
+        xl="12"
+        lg="12"
+        md="12"
+        sm="12"
+        cols="12"
+        class="pa-0 ma-0 py-7 d-flex align-center justify-center"
+      >
+        <login />
+      </v-col>
+    </v-row>
+    <v-row
       class="d-flex pa-0 ma-0 color primaryHome d-flex align-center justify-center"
       :style="`min-height: ${alturaTela}px;`"
     >
@@ -489,9 +535,19 @@
         lg="12"
         md="12"
         sm="12"
-        class="pa-0 ma-0 py-10 px-5 d-flex align-center justify-center"
+        class="pa-0 ma-0 py-10 px-5 d-flex justify-center"
       >
-        <span class="banner white--text">Olha o que você pode fazer!</span>
+        <span
+          class="banner white--text"
+          :style="{
+            'font-size': $vuetify.breakpoint.smAndDown ? '30px' :
+              $vuetify.breakpoint.mdAndDown ? '40px' :
+              $vuetify.breakpoint.lgAndDown ? '50px' :
+              '60px'
+          }"
+        >
+          Olha o que você pode fazer!
+        </span>
       </v-col>
       <v-col
         v-if="$vuetify.breakpoint.name === 'xl' || $vuetify.breakpoint.name === 'lg'"
@@ -628,7 +684,15 @@
         sm="12"
         class="pa-0 ma-0 d-flex align-center justify-center"
       >
-        <span class="sub-descricao white--text text-center">Faça um banner para uma promoção ou quando for o dia das mães... <br>Com a Umbrella designer a cratividade é o limite.</span>
+        <span
+          class="sub-descricao white--text text-center"
+          :style="{
+            'font-size': $vuetify.breakpoint.smAndDown ? '15px' : $vuetify.breakpoint.mdAndDown ? '20px' : '30px'
+          }"
+        >
+          Faça um banner para uma promoção ou quando for o dia das mães... <br>
+          Com a Umbrella designer a criatividade é o limite.
+        </span>
       </v-col>
       <v-col cols="12" />
     </v-row>
@@ -641,16 +705,30 @@
         cols="12"
         class="pa-0 ma-0 py-8 px-5 d-flex justify-center"
       >
-        <span class="banner primaryHome--text">Conheça nossa equipe!</span>
+        <span
+          class="banner primaryHome--text"
+          :style="{
+            'font-size': $vuetify.breakpoint.smAndDown ? '30px' :
+              $vuetify.breakpoint.mdAndDown ? '40px' :
+              $vuetify.breakpoint.lgAndDown ? '50px' :
+              '60px'
+          }"
+        >
+          Conheça nossa equipe!
+        </span>
       </v-col>
       <v-col
+        xl="12"
+        lg="12"
+        md="12"
+        sm="12"
         cols="12"
-        class="pa-0 ma-0 pb-10 d-flex align-center justify-center"
+        class="pa-0 ma-0 pb-10 d-flex justify-center"
       >
         <v-card
-          width="70%"
+          width="100%"
           color="white"
-          class="pa-0 ma-0"
+          class="pa-0 ma-0 mx-10"
         >
           <iframe
             class="pa-1 pb-0 ma-01"
@@ -666,14 +744,14 @@
       </v-col>
     </v-row>
     <v-row
-      id="perfis"
-      class="d-flex pa-0 ma-0 color primaryHome"
+      id="footer"
+      class="d-flex pa-0 ma-0 color primaryHome justify-center"
       :style="`min-height: ${alturaTela-400}px;`"
     >
       <v-col
-        xl="7"
-        lg="7"
-        md="12"
+        xl="4"
+        lg="4"
+        md="6"
         sm="12"
         cols="12"
         class="pa-0 ma-0 px-5 pt-10 d-flex- justify-center"
@@ -802,6 +880,20 @@
           >
             <span class="subTitulosFooter white--text">Política de privaciade</span>
           </v-col>
+        </v-row>
+      </v-col>
+      <v-col
+        xl="3"
+        lg="3"
+        md="6"
+        sm="12"
+        cols="12"
+        class="pa-0 ma-0 px-5 pt-10 d-flex- justify-center"
+      >
+        <v-row
+          dense
+          class="pa-0 ma-0"
+        >
           <v-col
             cols="12"
             class="pa-0 ma-0 d-flex align-center justify-center"
@@ -956,6 +1048,9 @@
 <script>
 export default {
   name: 'TelaSite',
+  components: {
+    login: () => import('@/views/login/index')
+  },
   data: () => ({
     slides: [
       require('@/assets/imagem1.jpg'),
@@ -997,7 +1092,6 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
 
 .titulo {
-  font-size: 40px;
   font-family: 'Mulish', sans-serif;
   font-weight: 800;
 }
@@ -1014,20 +1108,17 @@ export default {
 }
 
 .descricao {
-  font-size: 30px;
   font-family: 'Mulish', sans-serif;
   display: flex;
 }
 
 .banner {
-  font-size: 60px;
   font-family: 'Mulish', sans-serif;
   font-weight: 800;
   display: flex;
 }
 
 .sub-descricao {
-  font-size: 30px;
   font-family: 'Mulish', sans-serif;
   display: flex;
 }

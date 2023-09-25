@@ -1,11 +1,14 @@
 <template>
   <v-app>
+    <loading :value="loading" />
     <v-app-bar
       app
       color="primary"
       dark
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon
+        @click.stop="drawer = !drawer"
+      />
       <div class="d-flex align-center">
         <v-img
           class="shrink mx-2"
@@ -26,9 +29,14 @@
           offset-y
         >
           <template v-slot:activator="{ on }">
-            <v-list-item-avatar v-on="on">
-              <v-img src="https://randomuser.me/api/portraits/women/85.jpg" />
-            </v-list-item-avatar>
+            <v-avatar
+              color="primary elevation-4"
+              class="white--text font-weight-black headline"
+              size="45"
+              v-on="on"
+            >
+              {{ nome.substring(0,2) }}
+            </v-avatar>
           </template>
 
           <v-card width="220">
@@ -64,7 +72,7 @@
     </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"
-      temporary
+      :permanent="drawer"
       app
     >
       <v-list
@@ -78,6 +86,7 @@
           <v-list-item @click="abrirJenela('/pedido')">
             <v-list-item-title>Fazer Pedido</v-list-item-title>
           </v-list-item>
+
           <v-list-item @click="abrirJenela('/meus-pedidos')">
             <v-list-item-title>Histórico de Pedidos</v-list-item-title>
           </v-list-item>
@@ -88,8 +97,12 @@
             </v-list-item-title>
           </v-list-item>
 
-          <v-list-item>
+          <v-list-item @click="abrirJenela('/perfil')">
             <v-list-item-title>Informações do Perfil</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item @click="abrirJenela('/opcoes')">
+            <v-list-item-title>Opções Globais</v-list-item-title>
           </v-list-item>
 
           <v-list-item>
@@ -98,6 +111,12 @@
 
           <v-list-item>
             <v-list-item-title>Ajuda</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item @click="deslogar()">
+            <v-list-item-title>
+              Sair
+            </v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -141,8 +160,9 @@ export default {
   name: 'App',
 
   data: () => ({
+    loading: true,
     dataAtual: '',
-    drawer: false,
+    drawer: true,
     group: null,
     nome: window.atob(localStorage.getItem('umbrella:nome')),
     email: window.atob(localStorage.getItem('umbrella:email'))
@@ -183,9 +203,11 @@ export default {
       }
     },
     deslogar () {
+      this.loading = true
       this.logout()
       this.$router.push('/login')
       this.$notificacao('Usuário desconectado com sucesso!')
+      this.loading = false
     }
   }
 }

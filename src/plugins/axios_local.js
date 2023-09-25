@@ -5,7 +5,8 @@ import router from '@/router'
 const Axios = axios.create({
   baseURL: `${process.env.VUE_APP_URL}/api`,
   headers: {
-    Authorization: 'Bearer ' + localStorage.getItem('umbrella:token')
+    Authorization: 'Bearer ' + localStorage.getItem('umbrella:token'),
+    login: localStorage.getItem('umbrella:login') ? window.atob(localStorage.getItem('umbrella:login')) : ''
   }
 })
 
@@ -25,6 +26,7 @@ Axios.interceptors.response.use((response) => {
     localStorage.removeItem('umbrella:nome')
     localStorage.removeItem('umbrella:email')
     localStorage.removeItem('umbrella:login')
+    localStorage.removeItem('umbrella:perfil')
 
     delete axios.defaults.headers.Authorization
 
@@ -34,6 +36,8 @@ Axios.interceptors.response.use((response) => {
     localStorage.removeItem('umbrella:token')
     localStorage.removeItem('umbrella:nome')
     localStorage.removeItem('umbrella:email')
+    localStorage.removeItem('umbrella:login')
+    localStorage.removeItem('umbrella:perfil')
 
     router.push('/login')
     Vue.prototype.$notificacao(error.response.erro, 'atencao')

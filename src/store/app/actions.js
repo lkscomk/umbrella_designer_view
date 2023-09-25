@@ -9,6 +9,7 @@ export const login = async ({ commit }, dados) => {
       localStorage.setItem('umbrella:email', window.btoa(res.data.email))
       localStorage.setItem('umbrella:nome', window.btoa(res.data.nome))
       localStorage.setItem('umbrella:login', window.btoa(res.data.login))
+      localStorage.setItem('umbrella:perfil', window.btoa(res.data.id))
 
       axios.defaults.headers.Authorization = 'Bearer ' + res.data.token
       axios.defaults.headers['X-Login'] = res.data.login

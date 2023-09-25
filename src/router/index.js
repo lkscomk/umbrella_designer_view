@@ -12,7 +12,25 @@ const routes = [
         path: '/',
         name: 'home',
         component: () => import('../views/home/index.vue')
-      },
+      }
+    ],
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('umbrella:token')) {
+        next('/tela-principal')
+      } else {
+        localStorage.removeItem('umbrella:token')
+        localStorage.removeItem('umbrella:nome')
+        localStorage.removeItem('umbrella:login')
+        localStorage.removeItem('umbrella:email')
+        localStorage.removeItem('umbrella:perfil')
+        next()
+      }
+    }
+  },
+  {
+    path: '/login',
+    component: () => import('@/layout/layoutLoginCadastro.vue'),
+    children: [
       {
         path: '/cadastro',
         name: 'cadastro',
@@ -32,6 +50,7 @@ const routes = [
         localStorage.removeItem('umbrella:nome')
         localStorage.removeItem('umbrella:login')
         localStorage.removeItem('umbrella:email')
+        localStorage.removeItem('umbrella:perfil')
         next()
       }
     }
@@ -67,13 +86,23 @@ const routes = [
       },
       {
         path: '/pedido',
-        name: 'pedido',
+        name: 'Pedido',
         component: () => import('../views/pedido/index.vue')
       },
       {
         path: '/finalizar-pedido',
-        name: 'finalizar-pedido',
+        name: 'Finalizar Pedido',
         component: () => import('../views/finalizar_pedido/index.vue')
+      },
+      {
+        path: '/perfil',
+        name: 'Perfil',
+        component: () => import('../views/informacoes_perfil/index.vue')
+      },
+      {
+        path: '/opcoes',
+        name: 'Opções Globais',
+        component: () => import('../views/opcoes/index.vue')
       }
     ],
     beforeEnter: (to, from, next) => {

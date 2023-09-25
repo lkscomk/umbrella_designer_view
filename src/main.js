@@ -13,6 +13,10 @@ Vue.config.productionTip = false
 
 Vue.component('date-selector', () => import('./components/dataSelecionar'))
 Vue.component('notificacao', () => import('./components/notificacao'))
+Vue.component('tabela', () => import('./components/tabela'))
+Vue.component('filtro', () => import('./components/filtro'))
+Vue.component('pagina', () => import('./components/pagina'))
+Vue.component('loading', () => import('./components/loading'))
 
 new Vue({
   router,

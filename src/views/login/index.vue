@@ -3,17 +3,51 @@
     fluid
     class="fill-height d-flex align-center justify-center"
   >
+    <loading :value="loading" />
     <v-row class="ma-0 pa-0 d-flex justify-center">
-      <v-col cols="4">
-        <v-col
-          cols="12"
-          class="d-flex justify-center"
-        >
-          <v-img
-            max-width="400"
-            src="@/assets/logotipo.png"
-          />
-        </v-col>
+      <v-col
+        cols="12"
+        class="d-flex justify-center"
+      >
+        <v-img
+          v-if="$vuetify.breakpoint.name === 'xl'"
+          src="@/assets/logotipo.png"
+          max-width="400px"
+          contain
+        />
+        <v-img
+          v-else-if="$vuetify.breakpoint.name === 'lg'"
+          src="@/assets/logotipo.png"
+          max-width="350px"
+          contain
+        />
+        <v-img
+          v-else-if="$vuetify.breakpoint.name === 'md'"
+          src="@/assets/logotipo.png"
+          max-width="300px"
+          contain
+        />
+        <v-img
+          v-else-if="$vuetify.breakpoint.name === 'sm'"
+          src="@/assets/logotipo.png"
+          max-width="250px"
+          contain
+        />
+        <v-img
+          v-else
+          src="@/assets/logotipo.png"
+          max-width="200px"
+          contain
+        />
+      </v-col>
+      <v-col
+        xl="4"
+        lg="4"
+        md="5"
+        sm="10"
+        cols="12"
+        class="d-flex justify-center"
+      >
         <v-card
           flat
           width="1200"
@@ -61,11 +95,13 @@
                       >
                         <v-text-field
                           v-model="formulario.senha"
+                          :append-icon="mostrarSenha ? 'mdi-eye' : 'mdi-eye-off'"
                           :error-messages="errors"
                           :hide-details="!errors.length"
                           label="Senha"
                           outlined
-                          type="password"
+                          :type="mostrarSenha ? 'text' : 'password'"
+                          @click:append="mostrarSenha = !mostrarSenha"
                         />
                       </validation-provider>
                     </v-col>
@@ -123,6 +159,8 @@ import { mapActions, mapState } from 'vuex'
 export default {
   name: 'HomeLogin',
   data: () => ({
+    mostrarSenha: false,
+    loading: false,
     formulario: {
       email: null,
       senha: null
@@ -138,6 +176,7 @@ export default {
     ]),
     async fazerLogin () {
       if (await this.$refs.observer.validate()) {
+        this.loading = true
         const res = await this.login({
           email: this.formulario.email || null,
           senha: this.formulario.senha || null
@@ -145,6 +184,7 @@ export default {
         if (res && !res.erro) {
           this.abrirJenela('/tela-principal')
         }
+        this.loading = false
       }
     },
     abrirJenela (tela) {

@@ -3,20 +3,51 @@
     fluid
     class="fill-height d-flex align-center justify-center"
   >
+    <loading :value="loading" />
     <v-row class="ma-0 pa-0 d-flex justify-center">
       <v-col
-        cols="6"
-        class="ma-0 pa-0"
+        cols="12"
+        class="d-flex justify-center"
       >
-        <v-col
-          cols="12"
-          class="d-flex justify-center"
-        >
-          <v-img
-            max-width="400"
-            src="@/assets/logotipo.png"
-          />
-        </v-col>
+        <v-img
+          v-if="$vuetify.breakpoint.name === 'xl'"
+          src="@/assets/logotipo.png"
+          max-width="400px"
+          contain
+        />
+        <v-img
+          v-else-if="$vuetify.breakpoint.name === 'lg'"
+          src="@/assets/logotipo.png"
+          max-width="350px"
+          contain
+        />
+        <v-img
+          v-else-if="$vuetify.breakpoint.name === 'md'"
+          src="@/assets/logotipo.png"
+          max-width="300px"
+          contain
+        />
+        <v-img
+          v-else-if="$vuetify.breakpoint.name === 'sm'"
+          src="@/assets/logotipo.png"
+          max-width="250px"
+          contain
+        />
+        <v-img
+          v-else
+          src="@/assets/logotipo.png"
+          max-width="200px"
+          contain
+        />
+      </v-col>
+      <v-col
+        xl="7"
+        lg="7"
+        md="10"
+        sm="12"
+        cols="12"
+        class="d-flex justify-center"
+      >
         <v-card
           flat
           width="1200"
@@ -35,7 +66,13 @@
                   grid-list-xs
                 >
                   <v-row dense>
-                    <v-col cols="6">
+                    <v-col
+                      xl="6"
+                      lg="6"
+                      md="6"
+                      sm="12"
+                      cols="12"
+                    >
                       <validation-provider
                         v-slot="{ errors }"
                         name="Nome"
@@ -51,7 +88,13 @@
                         />
                       </validation-provider>
                     </v-col>
-                    <v-col cols="6">
+                    <v-col
+                      xl="6"
+                      lg="6"
+                      md="6"
+                      sm="12"
+                      cols="12"
+                    >
                       <validation-provider
                         v-slot="{ errors }"
                         name="Email"
@@ -67,7 +110,13 @@
                         />
                       </validation-provider>
                     </v-col>
-                    <v-col cols="4">
+                    <v-col
+                      xl="4"
+                      lg="4"
+                      md="4"
+                      sm="12"
+                      cols="12"
+                    >
                       <validation-provider
                         v-slot="{ errors }"
                         name="Data de Nascimento"
@@ -85,7 +134,13 @@
                         />
                       </validation-provider>
                     </v-col>
-                    <v-col cols="4">
+                    <v-col
+                      xl="4"
+                      lg="4"
+                      md="4"
+                      sm="12"
+                      cols="12"
+                    >
                       <validation-provider
                         v-slot="{ errors }"
                         name="CPF"
@@ -101,7 +156,13 @@
                         />
                       </validation-provider>
                     </v-col>
-                    <v-col cols="4">
+                    <v-col
+                      xl="4"
+                      lg="4"
+                      md="4"
+                      sm="12"
+                      cols="12"
+                    >
                       <validation-provider
                         v-slot="{ errors }"
                         name="Tipo de Usuário"
@@ -121,7 +182,13 @@
                         />
                       </validation-provider>
                     </v-col>
-                    <v-col cols="6">
+                    <v-col
+                      xl="6"
+                      lg="6"
+                      md="6"
+                      sm="12"
+                      cols="12"
+                    >
                       <validation-provider
                         v-slot="{ errors }"
                         name="Senha"
@@ -138,7 +205,13 @@
                         />
                       </validation-provider>
                     </v-col>
-                    <v-col cols="6">
+                    <v-col
+                      xl="6"
+                      lg="6"
+                      md="6"
+                      sm="12"
+                      cols="12"
+                    >
                       <validation-provider
                         v-slot="{ errors }"
                         name="Confirmação de Senha"
@@ -190,6 +263,7 @@ import { mapActions, mapState } from 'vuex'
 export default {
   name: 'TelaCadastro',
   data: () => ({
+    loading: false,
     formulario: {
       nome: null,
       email: null,
@@ -214,6 +288,7 @@ export default {
     ]),
     async cadastrarUsuario () {
       if (await this.$refs.observer.validate()) {
+        this.loading = true
         if (this.formulario.senha === this.formulario.confirmacaoSenha) {
           const res = await this.cadastrar({
             tipoUsuarioId: this.formulario.tipoUsuarioId || null,
@@ -230,6 +305,7 @@ export default {
         } else {
           this.$notificacao('As senhas devem ser iguais.', 'erro')
         }
+        this.loading = false
       }
     },
     abrirJenela (tela) {

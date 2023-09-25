@@ -109,6 +109,10 @@ export default {
         this.selectedDate = newVal
         this.updateFormattedDate()
       }
+    },
+    value (e) {
+      this.selectedDate = this.value
+      this.updateFormattedDate()
     }
   },
   methods: {
