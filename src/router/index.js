@@ -5,66 +5,55 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/tela-designer',
-    name: 'telaEnviadoDesigner',
-    component: function () {
-      return import('../views/tela_enviado_designer/index.vue')
-    }
-  },
-  {
-    path: '/tela-principal',
-    name: 'telaprincipal',
-    component: function () {
-      return import('../views/telaPrincipal/index.vue')
-    }
-  },
-  {
-    path: '/meus-pedidos',
-    name: 'meusPedidos',
-    component: function () {
-      return import('../views/meus_pedidos/index.vue')
-    }
-  },
-  {
-    path: '/escolher-designer',
-    name: 'escolherDesigner',
-    component: function () {
-      return import('../views/escolher_designer/index.vue')
-    }
-  },
-  {
-    path: '/cadastro',
-    name: 'cadastro',
-    component: function () {
-      return import('../views/cadastro/index.vue')
-    }
-  },
-  {
     path: '/',
     component: () => import('@/layout/layoutExterno.vue'),
     children: [
       {
         path: '/',
         name: 'home',
-        component: function () {
-          return import('../views/home/index.vue')
-        }
-      },
+        component: () => import('../views/home/index.vue')
+      }
+    ],
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('umbrella:token')) {
+        next('/tela-principal')
+      } else {
+        localStorage.removeItem('umbrella:token')
+        localStorage.removeItem('umbrella:nome')
+        localStorage.removeItem('umbrella:login')
+        localStorage.removeItem('umbrella:email')
+        localStorage.removeItem('umbrella:perfil')
+        next()
+      }
+    }
+  },
+  {
+    path: '/login',
+    component: () => import('@/layout/layoutLoginCadastro.vue'),
+    children: [
       {
         path: '/cadastro',
         name: 'cadastro',
-        component: function () {
-          return import('../views/cadastro/index.vue')
-        }
+        component: () => import('../views/cadastro/index.vue')
       },
       {
         path: '/login',
         name: 'login',
-        component: function () {
-          return import('../views/login/index.vue')
-        }
+        component: () => import('../views/login/index.vue')
       }
-    ]
+    ],
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('umbrella:token')) {
+        next('/tela-principal')
+      } else {
+        localStorage.removeItem('umbrella:token')
+        localStorage.removeItem('umbrella:nome')
+        localStorage.removeItem('umbrella:login')
+        localStorage.removeItem('umbrella:email')
+        localStorage.removeItem('umbrella:perfil')
+        next()
+      }
+    }
   },
   {
     path: '/',
@@ -73,74 +62,57 @@ const routes = [
       {
         path: '/tela-principal',
         name: 'telaprincipal',
-        component: function () {
-          return import('../views/telaPrincipal/index.vue')
-        }
+        component: () => import('../views/tela_principal/index.vue')
       },
       {
         path: '/tela-designer',
         name: 'telaEnviadoDesigner',
-        component: function () {
-          return import('../views/tela_enviado_designer/index.vue')
-        }
+        component: () => import('../views/tela_enviado_designer/index.vue')
       },
       {
         path: '/portfolio',
         name: 'portfolio',
-        component: function () {
-          return import('../views/portfolio/index.vue')
-        }
+        component: () => import('../views/portfolio/index.vue')
       },
       {
         path: '/meus-pedidos',
         name: 'meusPedidos',
-        component: function () {
-          return import('../views/meus_pedidos/index.vue')
-        }
+        component: () => import('../views/meus_pedidos/index.vue')
       },
       {
         path: '/escolher-designer',
         name: 'escolherDesigner',
-        component: function () {
-          return import('../views/escolher_designer/index.vue')
-        }
-      },
-      {
-        path: '/about',
-        name: 'about',
-        component: function () {
-          return import('../views/AboutView.vue')
-        }
-      },
-      {
-        path: '/portfolio',
-        name: 'portfolio',
-        component: function () {
-          return import('../views/portfolio/index.vue')
-        }
-      },
-      {
-        path: '/login',
-        name: 'login',
-        component: function () {
-          return import('../views/login/index.vue')
-        }
+        component: () => import('../views/escolher_designer/index.vue')
       },
       {
         path: '/pedido',
-        name: 'pedido',
-        component: function () {
-          return import('../views/pedido/index.vue')
-        }
+        name: 'Pedido',
+        component: () => import('../views/pedido/index.vue')
       },
       {
         path: '/finalizar-pedido',
-        name: 'finalizar-pedido',
-        component: function () {
-          return import('../views/finalizar_pedido/index.vue')
-        }
+        name: 'Finalizar Pedido',
+        component: () => import('../views/finalizar_pedido/index.vue')
+      },
+      {
+        path: '/perfil',
+        name: 'Perfil',
+        component: () => import('../views/informacoes_perfil/index.vue')
+      },
+      {
+        path: '/opcoes',
+        name: 'Opções Globais',
+        component: () => import('../views/opcoes/index.vue')
       }
-    ]
+    ],
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('umbrella:token')) {
+        next()
+      } else {
+        Vue.prototype.$notificacao('Usuário não autenticado', 'atencao')
+        next('/login')
+      }
+    }
   }
 ]
 

@@ -17,39 +17,6 @@
       </div>
 
       <v-spacer />
-
-      <v-btn
-        v-if="$vuetify.breakpoint.name === 'xl' || $vuetify.breakpoint.name === 'lg' || $vuetify.breakpoint.name === 'md'"
-        href="#home"
-        text
-        color="primaryHome"
-      >
-        <span class="mr-2">HOME</span>
-      </v-btn>
-      <v-btn
-        v-if="$vuetify.breakpoint.name === 'xl' || $vuetify.breakpoint.name === 'lg' || $vuetify.breakpoint.name === 'md'"
-        href="#quemSomos"
-        text
-        color="primaryHome"
-      >
-        <span class="mr-2">QUEM SOMOS</span>
-      </v-btn>
-      <v-btn
-        v-if="$vuetify.breakpoint.name === 'xl' || $vuetify.breakpoint.name === 'lg' || $vuetify.breakpoint.name === 'md'"
-        href="#banner"
-        text
-        color="primaryHome"
-      >
-        <span class="mr-2">O QUE É UM BANNER?</span>
-      </v-btn>
-      <v-btn
-        v-if="$vuetify.breakpoint.name === 'xl' || $vuetify.breakpoint.name === 'lg' || $vuetify.breakpoint.name === 'md'"
-        href="#perfis"
-        text
-        color="primaryHome"
-      >
-        <span class="mr-2">PERFIS</span>
-      </v-btn>
       <v-btn
         text
         color="primaryHome"

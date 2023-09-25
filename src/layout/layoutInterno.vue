@@ -1,14 +1,25 @@
 <template>
   <v-app>
+    <loading :value="loading" />
     <v-app-bar
       app
       color="primary"
       dark
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer">
-      </v-app-bar-nav-icon>
-
-      <v-spacer></v-spacer>
+      <v-app-bar-nav-icon
+        @click.stop="drawer = !drawer"
+      />
+      <div class="d-flex align-center">
+        <v-img
+          class="shrink mx-2"
+          contain
+          src="@/assets/logoUmbrellaBranca.png"
+          transition="scale-transition"
+          width="120"
+          @click="abrirJenela('/tela-principal')"
+        />
+      </div>
+      <v-spacer />
 
       <div class="d-flex d-inline-flex pl-2">
         <v-menu
@@ -18,18 +29,23 @@
           offset-y
         >
           <template v-slot:activator="{ on }">
-            <v-list-item-avatar v-on="on">
-              <v-img src="https://randomuser.me/api/portraits/women/85.jpg"></v-img>
-            </v-list-item-avatar>
+            <v-avatar
+              color="primary elevation-4"
+              class="white--text font-weight-black headline"
+              size="45"
+              v-on="on"
+            >
+              {{ nome.substring(0,2) }}
+            </v-avatar>
           </template>
 
           <v-card width="220">
-            <v-card-title class="subtitle justify-center mb-3">
-              Marina Reginato
+            <v-card-title class="subtitle mb-3">
+              {{ `${nome.split(' ')[0]} ${nome.split(' ')[1]}` }}
             </v-card-title>
 
             <v-card-subtitle>
-              marinareginalva@gmail.com
+              {{ email }}
             </v-card-subtitle>
 
             <v-divider class="mb-1" />
@@ -40,6 +56,7 @@
                   ? ''
                   : 'primary'"
                 block
+                @click="deslogar()"
               >
                 <v-icon
                   left
@@ -55,7 +72,7 @@
     </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"
-      temporary
+      :permanent="drawer"
       app
     >
       <v-list
@@ -66,15 +83,26 @@
           v-model="group"
           active-class="deep-purple--text text--accent-4"
         >
-          <v-list-item>
+          <v-list-item @click="abrirJenela('/pedido')">
             <v-list-item-title>Fazer Pedido</v-list-item-title>
           </v-list-item>
-          <v-list-item>
+
+          <v-list-item @click="abrirJenela('/meus-pedidos')">
             <v-list-item-title>Histórico de Pedidos</v-list-item-title>
           </v-list-item>
 
           <v-list-item>
+            <v-list-item-title @click="abrirJenela('/portfolio')">
+              Meu Portfolio
+            </v-list-item-title>
+          </v-list-item>
+
+          <v-list-item @click="abrirJenela('/perfil')">
             <v-list-item-title>Informações do Perfil</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item @click="abrirJenela('/opcoes')">
+            <v-list-item-title>Opções Globais</v-list-item-title>
           </v-list-item>
 
           <v-list-item>
@@ -84,12 +112,18 @@
           <v-list-item>
             <v-list-item-title>Ajuda</v-list-item-title>
           </v-list-item>
+
+          <v-list-item @click="deslogar()">
+            <v-list-item-title>
+              Sair
+            </v-list-item-title>
+          </v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
 
     <v-main>
-      <router-view/>
+      <router-view />
     </v-main>
 
     <v-footer
@@ -112,7 +146,7 @@
           Umbrella Designer
         </strong>
         <span v-if="!$vuetify.breakpoint.mobile">
-          - Versão {{ versao }}
+          - Versão
         </span>
       </v-col>
     </v-footer>
@@ -120,14 +154,18 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
 
   data: () => ({
+    loading: true,
     dataAtual: '',
-    drawer: false,
-    group: null
+    drawer: true,
+    group: null,
+    nome: window.atob(localStorage.getItem('umbrella:nome')),
+    email: window.atob(localStorage.getItem('umbrella:email'))
   }),
 
   watch: {
@@ -143,12 +181,33 @@ export default {
   },
 
   methods: {
+    ...mapActions('app', [
+      'logout'
+    ]),
     atualizarData () {
       this.dataAtual = this.$day().format('dddd - DD - MMMM - YYYY HH:mm:ss')
 
       setTimeout(() => {
         this.atualizarData()
       }, 1000)
+    },
+    abrirJenela (tela) {
+      if (tela !== this.$router.currentRoute.path) {
+        const route = this.$router.resolve({ path: tela })
+
+        if (tela) {
+          this.$router.push(route.href)
+        }
+      } else {
+        window.location.reload(true)
+      }
+    },
+    deslogar () {
+      this.loading = true
+      this.logout()
+      this.$router.push('/login')
+      this.$notificacao('Usuário desconectado com sucesso!')
+      this.loading = false
     }
   }
 }

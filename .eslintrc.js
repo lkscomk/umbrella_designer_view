@@ -4,15 +4,22 @@ module.exports = {
     node: true
   },
   extends: [
-    'plugin:vue/essential',
+    'plugin:vue/strongly-recommended',
     '@vue/standard'
   ],
   parserOptions: {
     ecmaVersion: 2020
   },
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'vue/no-multiple-template-root': 'off'
+    'no-console': 'error',
+    'no-debugger': 'error',
+    'vue/eqeqeq': 'error',
+    'vue/no-irregular-whitespace': 'error',
+    'vue/no-restricted-syntax': 'error',
+    'vue/no-confusing-v-for-v-if': 'warn',
+    'vue/order-in-components': 'error',
+    'vue/no-template-shadow': 'off',
+    'vue/this-in-template': 'error',
+    'vue/attributes-order': 'error'
   }
 }
