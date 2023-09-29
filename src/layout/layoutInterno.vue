@@ -41,7 +41,7 @@
 
           <v-card width="220">
             <v-card-title class="subtitle mb-3">
-              {{ `${nome.split(' ')[0]} ${nome.split(' ')[1]}` }}
+              {{ `${nome.split(' ')[0]}` }}
             </v-card-title>
 
             <v-card-subtitle>

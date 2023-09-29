@@ -64,3 +64,13 @@ export const salvar = async ({ commit }, dados) => {
     return null
   }
 }
+
+export const excluir = async ({ commit }, id) => {
+  try {
+    const res = await axios.delete('/opcoes/' + id)
+
+    return res.data
+  } catch (error) {
+    return null
+  }
+}
