@@ -10,138 +10,138 @@
         grid-list-xs
       >
         <v-row dense>
-      <v-col cols="1">
-        <v-text-field
-          v-model="formulario.login"
-          hide-details
-          disabled
-          dense
-          label="Login"
-          outlined
-        />
-      </v-col>
-      <v-col cols="5">
-        <validation-provider
-          v-slot="{ errors }"
-          name="Nome"
-          vid="nome"
-          rules="required"
-        >
-          <v-text-field
-            v-model="formulario.nome"
-            :error-messages="errors"
-            :hide-details="!errors.length"
-            :disabled="controle.exibir"
-            dense
-            label="Nome"
-            outlined
-          />
-        </validation-provider>
-      </v-col>
-      <v-col cols="6">
-        <v-text-field
-          v-model="formulario.email"
-          hide-details
-          disabled
-          dense
-          label="Email"
-          outlined
-        />
-      </v-col>
-      <v-col cols="3">
-        <validation-provider
-          v-slot="{ errors }"
-          name="Data de Nascimento"
-          vid="dataNascimento"
-          rules="required"
-        >
-          <date-selector
-            ref="dataSelector"
-            v-model="formulario.dataNascimento"
-            :error-messages="errors"
-            :hide-details="!errors.length"
-            :disabled="controle.exibir"
-            dense
-            label="Data de Nascimento"
-            outlined
-            readonly
-            clearable
-          />
-        </validation-provider>
-      </v-col>
-      <v-col cols="3">
-        <validation-provider
-          v-slot="{ errors }"
-          name="CPF"
-          vid="cpf"
-          rules="required|min:11|numeric"
-        >
-          <v-text-field
-            v-model="formulario.cpf"
-            :error-messages="errors"
-            :hide-details="!errors.length"
-            :disabled="controle.exibir"
-            dense
-            label="CPF"
-            outlined
-          />
-        </validation-provider>
-      </v-col>
-      <v-col cols="3">
-        <v-autocomplete
-          v-model="formulario.tipoUsuarioId"
-          :items="dropdownTipoUsuario"
-          hide-details
-          disabled
-          dense
-          item-value="item"
-          item-text="descricao"
-          label="Tipo de Usuário"
-          class="required"
-          outlined
-        />
-      </v-col>
-      <v-col cols="3">
-        <v-text-field
-          v-model="formulario.criadoEm"
-          hide-details
-          label="Usuário desde"
-          disabled
-          dense
-          outlined
-        />
-      </v-col>
-      <v-col
-        cols="12"
-        class="d-flex justify-end"
-      >
-        <v-btn
-          v-if="!!(!controle.exibir && (controle.inserir || controle.editar))"
-          color="success"
-          class="mx-1"
-          @click="salvarPerfilUsuario()"
-        >
-          Salvar
-        </v-btn>
-        <v-btn
-          v-if="!!(controle.exibir && !controle.inserir)"
-          color="success"
-          class="mx-1"
-          @click="controle.editar = true, controle.exibir = false"
-        >
-          Editar
-        </v-btn>
-        <v-btn
-          v-if="!!(!controle.exibir && (controle.inserir || controle.editar))"
-          color="error"
-          class="mx-1"
-          @click="buscarPerfilUsuario()"
-        >
-          CANCELAR
-        </v-btn>
-      </v-col>
-    </v-row>
-    </v-container>
+          <v-col cols="1">
+            <v-text-field
+              v-model="formulario.login"
+              hide-details
+              disabled
+              dense
+              label="Login"
+              outlined
+            />
+          </v-col>
+          <v-col cols="5">
+            <validation-provider
+              v-slot="{ errors }"
+              name="Nome"
+              vid="nome"
+              rules="required"
+            >
+              <v-text-field
+                v-model="formularioNome"
+                :error-messages="errors"
+                :hide-details="!errors.length"
+                :disabled="controle.exibir"
+                dense
+                label="Nome"
+                outlined
+              />
+            </validation-provider>
+          </v-col>
+          <v-col cols="6">
+            <v-text-field
+              v-model="formulario.email"
+              hide-details
+              disabled
+              dense
+              label="Email"
+              outlined
+            />
+          </v-col>
+          <v-col cols="3">
+            <validation-provider
+              v-slot="{ errors }"
+              name="Data de Nascimento"
+              vid="dataNascimento"
+              rules="required"
+            >
+              <date-selector
+                ref="dataSelector"
+                v-model="formulario.dataNascimento"
+                :error-messages="errors"
+                :hide-details="!errors.length"
+                :disabled="controle.exibir"
+                dense
+                label="Data de Nascimento"
+                outlined
+                readonly
+                clearable
+              />
+            </validation-provider>
+          </v-col>
+          <v-col cols="3">
+            <validation-provider
+              v-slot="{ errors }"
+              name="CPF"
+              vid="cpf"
+              rules="required|min:11|numeric"
+            >
+              <v-text-field
+                v-model="formulario.cpf"
+                :error-messages="errors"
+                :hide-details="!errors.length"
+                :disabled="controle.exibir"
+                dense
+                label="CPF"
+                outlined
+              />
+            </validation-provider>
+          </v-col>
+          <v-col cols="3">
+            <v-autocomplete
+              v-model="formulario.tipoUsuarioId"
+              :items="dropdownTipoUsuario"
+              hide-details
+              disabled
+              dense
+              item-value="item"
+              item-text="descricao"
+              label="Tipo de Usuário"
+              class="required"
+              outlined
+            />
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="formulario.criadoEm"
+              hide-details
+              label="Usuário desde"
+              disabled
+              dense
+              outlined
+            />
+          </v-col>
+          <v-col
+            cols="12"
+            class="d-flex justify-end"
+          >
+            <v-btn
+              v-if="!!(!controle.exibir && (controle.inserir || controle.editar))"
+              color="success"
+              class="mx-1"
+              @click="salvarPerfilUsuario()"
+            >
+              Salvar
+            </v-btn>
+            <v-btn
+              v-if="!!(controle.exibir && !controle.inserir)"
+              color="success"
+              class="mx-1"
+              @click="controle.editar = true, controle.exibir = false"
+            >
+              Editar
+            </v-btn>
+            <v-btn
+              v-if="!!(!controle.exibir && (controle.inserir || controle.editar))"
+              color="error"
+              class="mx-1"
+              @click="buscarPerfilUsuario()"
+            >
+              CANCELAR
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
     </validation-observer>
   </pagina>
 </template>
@@ -174,7 +174,15 @@ export default {
   computed: {
     ...mapState('perfil', [
       'dropdownTipoUsuario'
-    ])
+    ]),
+    formularioNome: {
+      get () {
+        return this.formulario.nome ? this.formulario.nome.toUpperCase() : this.formulario.nome
+      },
+      set (valor) {
+        this.formulario.nome = valor.toUpperCase()
+      }
+    }
   },
   async created () {
     await this.buscarDropdownTipoUsuario(2) // TIPOS DE PERFIS

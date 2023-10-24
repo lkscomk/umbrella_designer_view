@@ -14,7 +14,6 @@
           <v-col cols="12">
             <filtro
               :options="optionsFilter"
-              @adicionar="controle.inserir = true, modal = true, formulario.item = encontrarProximoItem(registros), formulario.grupo = filtro.grupo"
               @pesquisar="listarRegistro()"
             >
               <template slot="filtros">
@@ -27,13 +26,13 @@
                       <v-autocomplete
                         v-model="filtro.grupo"
                         :items="dropdownGrupos"
+                        disabled
                         hide-details
                         dense
                         item-value="item"
                         item-text="descricao"
                         label="Grupo"
                         outlined
-                        @change="listarRegistro()"
                       />
                     </v-col>
                     <v-col cols="3">
@@ -55,16 +54,113 @@
               :colunas="colunas"
               :registros="registros"
               exibir
-              @exibir="exibirRegistro($event)"
+              @exibir="listarRelacionamentoRegistro($event.item)"
             />
           </v-col>
         </v-row>
       </v-container>
     </v-form>
 
-    <!-- exibir item -->
+    <!-- exibir item e listar relacionamento-->
     <v-dialog
       v-model="modal"
+      persistent
+      max-width="1200px"
+    >
+      <v-card>
+        <v-toolbar
+          :class="$vuetify.theme.dark ? '' : 'grey--text text--darken-2'"
+          :color="$vuetify.theme.dark ? 'accent' : 'white'"
+          class="font-weight-bold"
+          flat
+          height="40"
+        >
+          <v-btn
+            color="error"
+            data-cy="btnFechar"
+            icon
+            small
+            title="Voltar"
+            @click="modalAdicionar = false, resetVoltarRelacionamento()"
+          >
+            <v-icon dark>
+              mdi-chevron-left
+            </v-icon>
+          </v-btn>
+          <v-toolbar-title class="px-2">
+            Cadastrado e Manutenção
+          </v-toolbar-title>
+        </v-toolbar>
+        <v-card-text class="pa-0 ma-0">
+          <v-container>
+            <v-row>
+              <v-col
+                cols="12"
+              >
+                <filtro
+                  :options="optionsFilterRelacionamento"
+                  @adicionar="controle.inserir = true, modalAdicionar = true, formulario.item = encontrarProximoItem(registrosRelacionamento)"
+                  @pesquisar="listarRelacionamentoRegistro(filtroRelacionamento.grupo)"
+                >
+                  <template slot="filtros">
+                    <v-container
+                      class="my-0 py-0"
+                      fluid
+                    >
+                      <v-row dense>
+                        <v-col cols="3">
+                          <v-autocomplete
+                            v-model="filtroRelacionamento.grupo"
+                            :items="dropdownGrupos"
+                            disabled
+                            hide-details
+                            dense
+                            item-value="item"
+                            item-text="descricao"
+                            label="Grupo"
+                            outlined
+                          />
+                        </v-col>
+                        <v-col cols="3">
+                          <v-text-field
+                            v-model="filtroRelacionamento.descricao"
+                            hide-details
+                            dense
+                            label="Descrição"
+                            outlined
+                          />
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </template>
+                </filtro>
+              </v-col>
+              <v-col cols="12">
+                <tabela
+                  :colunas="colunas"
+                  :registros="registrosRelacionamento"
+                  exibir
+                  @exibir="exibirRegistro($event)"
+                />
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            color="error"
+            @click="modal = false, resetVoltar()"
+          >
+            Fechar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <!-- exibir item -->
+    <v-dialog
+      v-model="modalAdicionar"
       persistent
       max-width="800px"
     >
@@ -82,7 +178,7 @@
             icon
             small
             title="Voltar"
-            @click="modal = false, resetFormulario()"
+            @click="modalAdicionar = false, resetVoltarRelacionamento()"
           >
             <v-icon dark>
               mdi-chevron-left
@@ -182,12 +278,12 @@
                   <v-col cols="5">
                     <validation-provider
                       v-slot="{ errors }"
-                      name="Descrição"
-                      vid="descricao"
+                      name="Nome"
+                      vid="nome"
                       rules="required"
                     >
                       <v-text-field
-                        v-model="formularioDescricao"
+                        v-model="formulario.descricao"
                         :error-messages="errors"
                         :hide-details="!errors.length"
                         :disabled="controle.exibir"
@@ -243,13 +339,14 @@
           <v-btn
             v-if="!!(controle.exibir && !controle.inserir)"
             color="success"
+            disabled
             @click="controle.editar = true, controle.exibir = false"
           >
             Editar
           </v-btn>
           <v-btn
             color="error"
-            @click="modal = false, resetFormulario()"
+            @click="modalAdicionar = false, resetVoltarRelacionamento()"
           >
             Fechar
           </v-btn>
@@ -263,7 +360,7 @@
 import { mapActions, mapMutations, mapState } from 'vuex'
 
 export default {
-  name: 'OpcoesGlobais',
+  name: 'PaginaAcessos',
   data: () => ({
     loading: false,
     perfil: window.atob(localStorage.getItem('umbrella:perfil')),
@@ -285,12 +382,6 @@ export default {
         align: 'start',
         sortable: false,
         value: 'grupo'
-      },
-      {
-        text: 'Descrição Grupo',
-        align: 'start',
-        sortable: false,
-        value: 'descricaoGrupo'
       },
       {
         text: 'Item',
@@ -318,8 +409,8 @@ export default {
       }
     ],
     filtro: {
-      grupo: 1,
-      descricao: null
+      descricao: null,
+      grupo: 1
     },
     filtroRelacionamento: {
       descricao: null,
@@ -338,26 +429,25 @@ export default {
       item: null,
       descricao: null
     },
-    modal: false
+    modal: false,
+    modalAdicionar: false
   }),
   computed: {
-    ...mapState('opcoes', [
+    ...mapState('acessos', [
       'registros',
       'registrosRelacionamento',
       'dropdownGrupos'
     ]),
-    formularioDescricao: {
-      get () {
-        return this.formulario.descricao ? this.formulario.descricao.toUpperCase() : this.formulario.descricao
-      },
-      set (valor) {
-        this.formulario.descricao = valor.toUpperCase()
-      }
-    },
     optionsFilter () {
       return {
+        adicionar: false,
+        values: !!(this.filtro.descricao)
+      }
+    },
+    optionsFilterRelacionamento () {
+      return {
         adicionar: true,
-        values: !!(this.filtro.descricao || this.filtro.grupo)
+        values: !!(this.filtroRelacionamento.descricao)
       }
     }
   },
@@ -366,14 +456,12 @@ export default {
     this.listarRegistro()
   },
   methods: {
-    ...mapMutations('opcoes', [
+    ...mapMutations('acessos', [
       'setRegistrosRelacionamento'
     ]),
-    ...mapActions('opcoes', [
+    ...mapActions('acessos', [
       'listar',
-      'exibir',
       'salvar',
-      'editar',
       'excluir',
       'listarRelacionamento',
       'buscarDropdownGrupos'
@@ -404,21 +492,15 @@ export default {
     async salvarRegistro () {
       if (await this.$refs.observer.validate()) {
         this.loading = true
-        const form = {
-          id: this.formulario.id || undefined,
+        const res = await this.salvar({
           item: this.formulario.item || null,
           grupo: this.formulario.grupo || null,
           descricao: this.formulario.descricao || null
-        }
-
-        let res
-        if (form.id) res = await this.editar(form)
-        else res = await this.salvar(form)
-
+        })
         if (res && !res.erro) {
-          this.modal = false
-          this.resetFormulario()
-          this.listarRegistro()
+          this.modalAdicionar = false
+          this.resetVoltarRelacionamento()
+          this.listarRelacionamentoRegistro(this.filtroRelacionamento.grupo)
         }
         this.loading = false
       }
@@ -427,9 +509,9 @@ export default {
       this.loading = true
       const res = await this.excluir(this.formulario.id)
       if (res && !res.erro) {
-        this.listarRegistro(this.formulario.grupo)
-        this.modal = false
-        this.resetFormulario()
+        this.listarRelacionamentoRegistro(this.formulario.grupo)
+        this.modalAdicionar = false
+        this.resetVoltarRelacionamento()
       }
       this.loading = false
     },
@@ -442,39 +524,33 @@ export default {
       return proximoItem
     },
 
-    async exibirRegistro (registro) {
-      this.loading = true
-      const res = await this.exibir(registro.id)
-      if (res && !res.erro) {
-        this.formulario = {
-          id: res.id || null,
-          created_at: res.created_at || null,
-          created_by: res.created_by || null,
-          item: res.item || null,
-          grupo: res.grupo || null,
-          descricao: res.descricao || null
-        }
+    exibirRegistro (registro) {
+      this.formulario = {
+        id: registro.id || null,
+        created_at: registro.created_at || null,
+        created_by: registro.created_by || null,
+        item: registro.item || null,
+        grupo: registro.grupo || null,
+        descricao: registro.descricao || null
       }
-      this.loading = false
-      this.modal = true
+      this.modalAdicionar = true
       this.controle.exibir = true
     },
-    async resetFormulario () {
-      await this.buscarDropdownGrupos(1) // GRUPOS DE OPÇOES
-      this.modal = false
+    resetVoltar () {
+      this.setRegistrosRelacionamento([])
+    },
+    resetVoltarRelacionamento () {
+      this.modalAdicionar = false
       this.controle = {
         exibir: null,
         inserir: null,
         editar: null
       }
-      this.formulario = {
-        id: null,
-        created_at: null,
-        created_by: null,
-        item: null,
-        grupo: null,
-        descricao: null
-      }
+      this.formulario.created_at = null
+      this.formulario.created_by = null
+      this.formulario.id = null
+      this.formulario.item = null
+      this.formulario.descricao = null
     }
   }
 }

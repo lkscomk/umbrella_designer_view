@@ -145,7 +145,7 @@
                         v-slot="{ errors }"
                         name="CPF"
                         vid="cpf"
-                        rules="required|min:11|numeric"
+                        rules="required|numeric|cpf"
                       >
                         <v-text-field
                           v-model="formulario.cpf"

@@ -103,6 +103,16 @@ const routes = [
         path: '/opcoes',
         name: 'Opções Globais',
         component: () => import('@/views/opcoes/index.vue')
+      },
+      {
+        path: '/usuarios',
+        name: 'Usuários',
+        component: () => import('../views/usuarios/index.vue')
+      },
+      {
+        path: '/acessos',
+        name: 'Acessos',
+        component: () => import('../views/acessos/index.vue')
       }
     ],
     beforeEnter: (to, from, next) => {

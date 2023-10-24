@@ -32,7 +32,6 @@ Axios.interceptors.response.use((response) => {
 
     router.push('/login')
   } else if (error.response.status === 401) {
-    window.console.log(error.response)
     localStorage.removeItem('umbrella:token')
     localStorage.removeItem('umbrella:nome')
     localStorage.removeItem('umbrella:email')
@@ -40,7 +39,7 @@ Axios.interceptors.response.use((response) => {
     localStorage.removeItem('umbrella:perfil')
 
     router.push('/login')
-    Vue.prototype.$notificacao(error.response.erro, 'atencao')
+    Vue.prototype.$notificacao(error.response.data.mensagem, 'atencao')
   } else if (error.response.status === 403) {
     Vue.prototype.$notificacao('Usuário sem permissão', 'atencao')
   } else if (error.response.status === 404) {

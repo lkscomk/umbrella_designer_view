@@ -1,5 +1,6 @@
 export default {
   login: '',
+  acessos_usuario: '',
   notificacao: {
     ativo: false,
     cor: null,

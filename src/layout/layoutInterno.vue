@@ -83,34 +83,12 @@
           v-model="group"
           active-class="deep-purple--text text--accent-4"
         >
-          <v-list-item @click="abrirJenela('/pedido')">
-            <v-list-item-title>Fazer Pedido</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item @click="abrirJenela('/meus-pedidos')">
-            <v-list-item-title>Histórico de Pedidos</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title @click="abrirJenela('/portfolio')">
-              Meu Portfolio
-            </v-list-item-title>
-          </v-list-item>
-
-          <v-list-item @click="abrirJenela('/perfil')">
-            <v-list-item-title>Informações do Perfil</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item @click="abrirJenela('/opcoes')">
-            <v-list-item-title>Opções Globais</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Configurações</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Ajuda</v-list-item-title>
+          <v-list-item
+            v-for="(tela, index) in acessos_usuario"
+            :key="index"
+            @click="abrirJenela(tela.url)"
+          >
+            <v-list-item-title>{{ tela.nome }}</v-list-item-title>
           </v-list-item>
 
           <v-list-item @click="deslogar()">
@@ -154,13 +132,14 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'App',
 
   data: () => ({
     loading: true,
+    perfil: window.atob(localStorage.getItem('umbrella:perfil')),
     dataAtual: '',
     drawer: true,
     group: null,
@@ -168,6 +147,11 @@ export default {
     email: window.atob(localStorage.getItem('umbrella:email'))
   }),
 
+  computed: {
+    ...mapState('app', [
+      'acessos_usuario'
+    ])
+  },
   watch: {
     group () {
       this.drawer = false
@@ -178,11 +162,15 @@ export default {
     setTimeout(() => {
       this.atualizarData()
     }, 200)
+    setTimeout(async () => {
+      await this.buscarAcessos(this.perfil)
+    }, 200)
   },
 
   methods: {
     ...mapActions('app', [
-      'logout'
+      'logout',
+      'buscarAcessos'
     ]),
     atualizarData () {
       this.dataAtual = this.$day().format('dddd - DD - MMMM - YYYY HH:mm:ss')

@@ -69,6 +69,24 @@
                     </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
+                <v-list-item
+                  dense
+                  data-cy="btnLimparFiltros"
+                  @click="$emit('clearFilters')"
+                >
+                  <v-list-item-icon class="mr-3">
+                    <v-icon
+                      :color="$vuetify.theme.dark ? 'white' : 'primary'"
+                    >
+                      mdi-filter-remove
+                    </v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      Limpar Filtros
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
               </v-list>
             </v-menu>
 
