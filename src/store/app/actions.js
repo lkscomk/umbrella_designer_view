@@ -21,6 +21,20 @@ export const login = async ({ commit }, dados) => {
   }
 }
 
+export const buscarAcessos = async ({ commit }, id) => {
+  try {
+    const res = await axios.get('/acessos_tela/' + id)
+
+    if (!res.data.erro) {
+      commit('acessos_usuario', res.data)
+    }
+
+    return res.data
+  } catch (error) {
+    return null
+  }
+}
+
 export const logout = async ({ commit }) => {
   localStorage.removeItem('umbrella:token')
   localStorage.removeItem('umbrella:nome')

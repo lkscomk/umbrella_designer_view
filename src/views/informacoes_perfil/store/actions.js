@@ -23,3 +23,13 @@ export const buscarUsuario = async ({ commit }, id) => {
     return null
   }
 }
+
+export const salvarUsuario = async ({ commit }, dados) => {
+  try {
+    const res = await axios.put('/usuario/' + dados.id, dados)
+
+    return res.data
+  } catch (error) {
+    return null
+  }
+}

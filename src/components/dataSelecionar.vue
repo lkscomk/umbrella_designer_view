@@ -9,6 +9,7 @@
   >
     <template v-slot:activator="{ on }">
       <v-text-field
+        ref="data"
         v-model="formattedDate"
         append-icon="mdi-calendar"
         :clearable="clearable"
@@ -114,6 +115,11 @@ export default {
       this.selectedDate = this.value
       this.updateFormattedDate()
     }
+  },
+  async created () {
+    setTimeout(() => {
+      this.selectedDate = this.value
+    }, 500)
   },
   methods: {
     isValidDate (dateString) {

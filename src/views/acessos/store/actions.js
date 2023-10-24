@@ -2,7 +2,7 @@ import axios from '@/plugins/axios_local'
 
 export const buscarDropdownGrupos = async ({ commit }, grupo) => {
   try {
-    const res = await axios.get('/sistema/opcoes/' + grupo)
+    const res = await axios.get('/opcoes/' + grupo)
 
     if (!res.data.erro) {
       commit('dropdownGrupos', res.data)
@@ -29,17 +29,6 @@ export const listar = async ({ commit }, filtros) => {
     return null
   }
 }
-
-export const exibir = async ({ commit }, id) => {
-  try {
-    const res = await axios.get('/opcoes/' + id)
-
-    return res.data
-  } catch (error) {
-    return null
-  }
-}
-
 export const listarRelacionamento = async ({ commit }, filtros) => {
   try {
     const res = await axios.get('/opcoes', {
@@ -56,9 +45,9 @@ export const listarRelacionamento = async ({ commit }, filtros) => {
   }
 }
 
-export const salvar = async ({ commit }, dados) => {
+export const exibir = async ({ commit }, grupo) => {
   try {
-    const res = await axios.post('/opcoes', dados)
+    const res = await axios.get('/opcoes/' + grupo)
 
     return res.data
   } catch (error) {
@@ -66,9 +55,9 @@ export const salvar = async ({ commit }, dados) => {
   }
 }
 
-export const editar = async ({ commit }, dados) => {
+export const salvar = async ({ commit }, dados) => {
   try {
-    const res = await axios.put('/opcoes/' + dados.id, dados)
+    const res = await axios.post('/opcoes', dados)
 
     return res.data
   } catch (error) {

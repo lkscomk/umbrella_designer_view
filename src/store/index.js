@@ -4,6 +4,8 @@ import app from './app/'
 import cadastro from '../views/cadastro/store'
 import perfil from '../views/informacoes_perfil/store'
 import opcoes from '../views/opcoes/store'
+import usuarios from '../views/usuarios/store'
+import acessos from '../views/acessos/store'
 
 Vue.use(Vuex)
 
@@ -20,6 +22,8 @@ export default new Vuex.Store({
     app,
     cadastro,
     perfil,
-    opcoes
+    opcoes,
+    usuarios,
+    acessos
   }
 })

@@ -11,7 +11,7 @@ const routes = [
       {
         path: '/',
         name: 'home',
-        component: () => import('../views/home/index.vue')
+        component: () => import('@/views/home/index.vue')
       }
     ],
     beforeEnter: (to, from, next) => {
@@ -34,12 +34,12 @@ const routes = [
       {
         path: '/cadastro',
         name: 'cadastro',
-        component: () => import('../views/cadastro/index.vue')
+        component: () => import('@/views/cadastro/index.vue')
       },
       {
         path: '/login',
         name: 'login',
-        component: () => import('../views/login/index.vue')
+        component: () => import('@/views/login/index.vue')
       }
     ],
     beforeEnter: (to, from, next) => {
@@ -62,47 +62,57 @@ const routes = [
       {
         path: '/tela-principal',
         name: 'telaprincipal',
-        component: () => import('../views/tela_principal/index.vue')
+        component: () => import('@/views/tela_principal/index.vue')
       },
       {
         path: '/tela-designer',
         name: 'telaEnviadoDesigner',
-        component: () => import('../views/tela_enviado_designer/index.vue')
+        component: () => import('@/views/tela_enviado_designer/index.vue')
       },
       {
         path: '/portfolio',
         name: 'portfolio',
-        component: () => import('../views/portfolio/index.vue')
+        component: () => import('@/views/portfolio/index.vue')
       },
       {
         path: '/meus-pedidos',
         name: 'meusPedidos',
-        component: () => import('../views/meus_pedidos/index.vue')
+        component: () => import('@/views/meus_pedidos/index.vue')
       },
       {
         path: '/escolher-designer',
         name: 'escolherDesigner',
-        component: () => import('../views/escolher_designer/index.vue')
+        component: () => import('@/views/escolher_designer/index.vue')
       },
       {
         path: '/pedido',
         name: 'Pedido',
-        component: () => import('../views/pedido/index.vue')
+        component: () => import('@/views/pedido/index.vue')
       },
       {
         path: '/finalizar-pedido',
         name: 'Finalizar Pedido',
-        component: () => import('../views/finalizar_pedido/index.vue')
+        component: () => import('@/views/finalizar_pedido/index.vue')
       },
       {
         path: '/perfil',
         name: 'Perfil',
-        component: () => import('../views/informacoes_perfil/index.vue')
+        component: () => import('@/views/informacoes_perfil/index.vue')
       },
       {
         path: '/opcoes',
         name: 'Opções Globais',
-        component: () => import('../views/opcoes/index.vue')
+        component: () => import('@/views/opcoes/index.vue')
+      },
+      {
+        path: '/usuarios',
+        name: 'Usuários',
+        component: () => import('../views/usuarios/index.vue')
+      },
+      {
+        path: '/acessos',
+        name: 'Acessos',
+        component: () => import('../views/acessos/index.vue')
       }
     ],
     beforeEnter: (to, from, next) => {
