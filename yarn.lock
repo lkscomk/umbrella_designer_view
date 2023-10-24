@@ -38,6 +38,16 @@
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.22.15.tgz#d34592bfe288a32e741aa0663dbc4829fcd55160"
   integrity sha512-RWmQ/sklUN9BvGGpCDgSubhHWfAx24XDTDObup4ffvxaYsptOg2P3KG0j+1eWKLxpkX0j0uHxmpq2Z1SP/VhxA==
 
+"@capacitor/android@^5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-5.5.0.tgz#42a5d205fdb5b88109ff9326136fc44ae9a9e621"
+  integrity sha512-ipJijb3M0FA6DvotS9zrbJ8p/mTEVg9EVtBmvUexogm8g5se1mc7i1gvOr3MQ/iTZ3PnNrRC/P7kHxa2R55iqg==
+
+"@capacitor/ios@^5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-5.5.0.tgz#a7171af7060f355bdd44e347200283a5c60b28dd"
+  integrity sha512-kApjblUOlLY91+1OrWIx+vaVfEN1bl1kh1jSgK1/IdGfS9kFs1hxUE/okRoLJGT6tYeSOa6GA/19MLOs64wb6A==
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"

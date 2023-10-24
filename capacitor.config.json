@@ -1,0 +1,6 @@
+{
+  "appId": "com.example.app",
+  "appName": "umbrella_designer",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
