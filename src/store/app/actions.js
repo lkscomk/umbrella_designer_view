@@ -2,7 +2,7 @@ import axios from '@/plugins/axios_local'
 
 export const login = async ({ commit }, dados) => {
   try {
-    const res = await axios.post('/login', dados)
+    const res = await axios.post('/sistema/login', dados)
 
     if (res.data.token) {
       localStorage.setItem('umbrella:token', res.data.token)
@@ -23,7 +23,7 @@ export const login = async ({ commit }, dados) => {
 
 export const buscarAcessos = async ({ commit }, id) => {
   try {
-    const res = await axios.get('/acessos_tela/' + id)
+    const res = await axios.get('/sistema/acessos_tela/' + id)
 
     if (!res.data.erro) {
       commit('acessos_usuario', res.data)
@@ -42,4 +42,14 @@ export const logout = async ({ commit }) => {
   localStorage.removeItem('umbrella:login')
 
   delete axios.defaults.headers.Authorization
+}
+
+export const buscarPathImagem = async ({ commit }, id) => {
+  try {
+    const res = await axios.get('/anexos/usuario/' + id)
+
+    return res.data
+  } catch (error) {
+    return null
+  }
 }

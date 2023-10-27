@@ -35,7 +35,12 @@
               size="45"
               v-on="on"
             >
-              {{ nome.substring(0,2) }}
+              <v-img
+                v-if="imagemPerfil"
+                :src="imagemPerfil"
+                alt="Profile Image"
+              />
+              <div v-else>{{ nome.substring(0,2) }}</div>
             </v-avatar>
           </template>
 
@@ -133,6 +138,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import axios from '@/plugins/axios_local'
 
 export default {
   name: 'App',
@@ -144,7 +150,8 @@ export default {
     drawer: true,
     group: null,
     nome: window.atob(localStorage.getItem('umbrella:nome')),
-    email: window.atob(localStorage.getItem('umbrella:email'))
+    email: window.atob(localStorage.getItem('umbrella:email')),
+    imagemPerfil: null
   }),
 
   computed: {
@@ -164,14 +171,36 @@ export default {
     }, 200)
     setTimeout(async () => {
       await this.buscarAcessos(this.perfil)
+      await this.buscarImagem()
     }, 200)
   },
 
   methods: {
     ...mapActions('app', [
       'logout',
-      'buscarAcessos'
+      'buscarAcessos',
+      'buscarPathImagem'
     ]),
+    async buscarImagem () {
+      const res = await this.buscarPathImagem(this.perfil)
+      let foto = null
+      if (res && !res.erro && res.checksum) {
+        await axios
+          .get(`https://servidor-arquivos-umbrella.lukasrocha.repl.co/download${res.checksum}`, {
+            responseType: 'arraybuffer'
+          })
+          .then(function (response) {
+            foto = response.data
+          })
+          .catch(function (error) {
+            window.console.log(error)
+          })
+        const buffer = Buffer.from(foto, 'binary')
+        const blob = new Blob([buffer], { type: 'image/png' })
+        const imageUrl = URL.createObjectURL(blob)
+        this.imagemPerfil = imageUrl
+      }
+    },
     atualizarData () {
       this.dataAtual = this.$day().format('dddd - DD - MMMM - YYYY HH:mm:ss')
 

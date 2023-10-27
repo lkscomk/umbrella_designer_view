@@ -23,7 +23,13 @@
                   fluid
                 >
                   <v-row dense>
-                    <v-col cols="3">
+                    <v-col
+                      xl="3"
+                      lg="3"
+                      md="10"
+                      sm="12"
+                      cols="12"
+                    >
                       <v-autocomplete
                         v-model="filtro.grupo"
                         :items="dropdownGrupos"
@@ -36,7 +42,13 @@
                         @change="listarRegistro()"
                       />
                     </v-col>
-                    <v-col cols="3">
+                    <v-col
+                      xl="4"
+                      lg="4"
+                      md="10"
+                      sm="12"
+                      cols="12"
+                    >
                       <v-text-field
                         v-model="filtro.descricao"
                         hide-details
