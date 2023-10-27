@@ -22,7 +22,13 @@
                   fluid
                 >
                   <v-row dense>
-                    <v-col cols="1">
+                    <v-col
+                      xl="1"
+                      lg="1"
+                      md="4"
+                      sm="12"
+                      cols="12"
+                    >
                       <v-text-field
                         v-model="filtro.id"
                         hide-details
@@ -31,7 +37,13 @@
                         outlined
                       />
                     </v-col>
-                    <v-col cols="3">
+                    <v-col
+                      xl="3"
+                      lg="3"
+                      md="8"
+                      sm="12"
+                      cols="12"
+                    >
                       <v-text-field
                         v-model="filtro.nome"
                         hide-details
@@ -40,7 +52,13 @@
                         outlined
                       />
                     </v-col>
-                    <v-col cols="2">
+                    <v-col
+                      xl="2"
+                      lg="2"
+                      md="4"
+                      sm="12"
+                      cols="12"
+                    >
                       <selecao-all
                         v-model="filtro.tipo"
                         :items="dropdownTiposUsuarios"
@@ -52,7 +70,13 @@
                         outlined
                       />
                     </v-col>
-                    <v-col cols="3">
+                    <v-col
+                      xl="3"
+                      lg="3"
+                      md="8"
+                      sm="12"
+                      cols="12"
+                    >
                       <v-text-field
                         v-model="filtro.email"
                         hide-details
@@ -61,7 +85,13 @@
                         outlined
                       />
                     </v-col>
-                    <v-col cols="3">
+                    <v-col
+                      xl="3"
+                      lg="3"
+                      md="8"
+                      sm="12"
+                      cols="12"
+                    >
                       <v-text-field
                         v-model="filtro.cpf"
                         hide-details
@@ -143,17 +173,25 @@
                     </validation-provider>
                   </v-col>
                   <v-col cols="4">
-                    <v-autocomplete
-                      v-model="formulario.tipo"
-                      :items="dropdownTiposUsuarios"
-                      disabled
-                      hide-details
-                      dense
-                      item-value="item"
-                      item-text="descricao"
-                      label="Tipo"
-                      outlined
-                    />
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="Nome"
+                      vid="nome"
+                      rules="required"
+                    >
+                      <v-autocomplete
+                        v-model="formulario.tipo"
+                        :items="dropdownTiposUsuarios"
+                        :error-messages="errors"
+                        :hide-details="!errors.length"
+                        :disabled="controle.exibir"
+                        dense
+                        item-value="item"
+                        item-text="descricao"
+                        label="Tipo"
+                        outlined
+                      />
+                    </validation-provider>
                   </v-col>
                   <v-col cols="4">
                     <v-text-field
@@ -412,6 +450,7 @@ export default {
         const form = {
           id: this.formulario.id || undefined,
           nome: this.formulario.nome || undefined,
+          tipo: this.formulario.tipo || undefined,
           email: this.formulario.email || undefined,
           data_nascimento: this.formulario.dataNascimento || undefined,
           cpf: this.formulario.cpf || undefined
