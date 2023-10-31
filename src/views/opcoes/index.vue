@@ -4,7 +4,6 @@
     subtitulo="Página de Manutenção de Opções"
     titulo="Opções"
   >
-  {{ $vuetify.breakpoint.name }}
     <!-- listagem -->
     <v-form @submit.prevent="''">
       <v-container
@@ -112,12 +111,6 @@
             left
           >
             <template v-slot:activator="{ on }">
-              <v-tooltip
-                activator="#pg-btn-mais-opcoes"
-                bottom
-              >
-                <span>Mais Opções</span>
-              </v-tooltip>
               <v-btn
                 id="pg-btn-mais-opcoes"
                 class="mx-0"
@@ -159,7 +152,7 @@
                     xl="1"
                     lg="1"
                     md="1"
-                    sm="2"
+                    sm="3"
                     cols="12"
                   >
                     <v-text-field
@@ -175,7 +168,7 @@
                     :xl="formulario.id ? 4 : 5"
                     :lg="formulario.id ? 4 : 5"
                     :md="formulario.id ? 4 : 5"
-                    :sm="formulario.id ? 4 : 7"
+                    :sm="formulario.id ? 6 : 5"
                     cols="12"
                   >
                     <v-autocomplete
@@ -232,7 +225,11 @@
                   </v-col>
                   <v-col
                     v-if="formulario.id"
-                    cols="4"
+                    xl="3"
+                    lg="3"
+                    md="3"
+                    sm="3"
+                    cols="12"
                   >
                     <v-text-field
                       v-model="formulario.created_by"
@@ -245,7 +242,11 @@
                   </v-col>
                   <v-col
                     v-if="formulario.id"
-                    cols="4"
+                    xl="4"
+                    lg="4"
+                    md="4"
+                    sm="4"
+                    cols="12"
                   >
                     <v-text-field
                       v-model="formulario.created_at"

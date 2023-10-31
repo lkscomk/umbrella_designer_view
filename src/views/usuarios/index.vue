@@ -116,7 +116,6 @@
         </v-row>
       </v-container>
     </v-form>
-
     <v-dialog
       v-model="modal"
       persistent
@@ -134,7 +133,13 @@
                 fluid
               >
                 <v-row dense>
-                  <v-col cols="2">
+                  <v-col
+                    xl="2"
+                    lg="2"
+                    md="2"
+                    sm="2"
+                    cols="12"
+                  >
                     <v-text-field
                       v-model="formulario.id"
                       disabled
@@ -144,7 +149,13 @@
                       outlined
                     />
                   </v-col>
-                  <v-col cols="2">
+                  <v-col
+                    xl="2"
+                    lg="2"
+                    md="2"
+                    sm="4"
+                    cols="12"
+                  >
                     <v-text-field
                       v-model="formulario.login"
                       disabled
@@ -154,7 +165,13 @@
                       outlined
                     />
                   </v-col>
-                  <v-col cols="4">
+                  <v-col
+                    xl="4"
+                    lg="4"
+                    md="4"
+                    sm="6"
+                    cols="12"
+                  >
                     <validation-provider
                       v-slot="{ errors }"
                       name="Nome"
@@ -172,11 +189,17 @@
                       />
                     </validation-provider>
                   </v-col>
-                  <v-col cols="4">
+                  <v-col
+                    xl="4"
+                    lg="4"
+                    md="4"
+                    sm="4"
+                    cols="12"
+                  >
                     <validation-provider
                       v-slot="{ errors }"
-                      name="Nome"
-                      vid="nome"
+                      name="Tipo"
+                      vid="tipo"
                       rules="required"
                     >
                       <v-autocomplete
@@ -193,7 +216,13 @@
                       />
                     </validation-provider>
                   </v-col>
-                  <v-col cols="4">
+                  <v-col
+                    xl="4"
+                    lg="4"
+                    md="4"
+                    sm="8"
+                    cols="12"
+                  >
                     <v-text-field
                       v-model="formulario.email"
                       disabled
@@ -203,7 +232,13 @@
                       outlined
                     />
                   </v-col>
-                  <v-col cols="3">
+                  <v-col
+                    xl="3"
+                    lg="3"
+                    md="3"
+                    sm="4"
+                    cols="12"
+                  >
                     <validation-provider
                       v-slot="{ errors }"
                       name="Data de Nascimento"
@@ -224,7 +259,13 @@
                       />
                     </validation-provider>
                   </v-col>
-                  <v-col cols="2">
+                  <v-col
+                    xl="2"
+                    lg="2"
+                    md="2"
+                    sm="4"
+                    cols="12"
+                  >
                     <validation-provider
                       v-slot="{ errors }"
                       name="CPF"
@@ -242,7 +283,13 @@
                       />
                     </validation-provider>
                   </v-col>
-                  <v-col cols="3">
+                  <v-col
+                    xl="3"
+                    lg="3"
+                    md="3"
+                    sm="4"
+                    cols="12"
+                  >
                     <v-text-field
                       v-model="formulario.created_at"
                       disabled
@@ -382,6 +429,7 @@ export default {
           : null) ||
         this.filtro.nome ||
         this.filtro.email ||
+        this.filtro.id ||
         this.filtro.cpf
       )
     },
