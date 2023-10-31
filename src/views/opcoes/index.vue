@@ -4,6 +4,7 @@
     subtitulo="Página de Manutenção de Opções"
     titulo="Opções"
   >
+  {{ $vuetify.breakpoint.name }}
     <!-- listagem -->
     <v-form @submit.prevent="''">
       <v-container
@@ -155,7 +156,11 @@
                 <v-row dense>
                   <v-col
                     v-if="formulario.id"
-                    cols="1"
+                    xl="1"
+                    lg="1"
+                    md="1"
+                    sm="2"
+                    cols="12"
                   >
                     <v-text-field
                       v-model="formulario.id"
@@ -167,7 +172,11 @@
                     />
                   </v-col>
                   <v-col
-                    :cols="formulario.id ? 4 : 5"
+                    :xl="formulario.id ? 4 : 5"
+                    :lg="formulario.id ? 4 : 5"
+                    :md="formulario.id ? 4 : 5"
+                    :sm="formulario.id ? 4 : 7"
+                    cols="12"
                   >
                     <v-autocomplete
                       v-model="formulario.grupo"
@@ -181,7 +190,13 @@
                       outlined
                     />
                   </v-col>
-                  <v-col cols="2">
+                  <v-col
+                    xl="2"
+                    lg="2"
+                    md="2"
+                    sm="2"
+                    cols="12"
+                  >
                     <v-text-field
                       v-model="formulario.item"
                       hide-details
@@ -191,7 +206,13 @@
                       outlined
                     />
                   </v-col>
-                  <v-col cols="5">
+                  <v-col
+                    xl="5"
+                    lg="5"
+                    md="5"
+                    sm="5"
+                    cols="12"
+                  >
                     <validation-provider
                       v-slot="{ errors }"
                       name="Descrição"

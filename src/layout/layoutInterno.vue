@@ -147,7 +147,7 @@ export default {
     loading: true,
     perfil: window.atob(localStorage.getItem('umbrella:perfil')),
     dataAtual: '',
-    drawer: true,
+    drawer: false,
     group: null,
     nome: window.atob(localStorage.getItem('umbrella:nome')),
     email: window.atob(localStorage.getItem('umbrella:email')),

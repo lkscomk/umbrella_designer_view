@@ -9,7 +9,7 @@
       :style="`min-height: ${alturaTela}px;`"
     >
       <v-col
-        cols="6"
+        cols="12"
         class="ma-0 pa-0"
       >
         <v-col
@@ -149,7 +149,7 @@
         md="6"
         sm="12"
         cols="12"
-        class="pa-0 ma-0 d-flex align-start justify-center"
+        class="pa-0 ma-0 d-flex align-start justify-center color"
       >
         <v-img
           v-if="$vuetify.breakpoint.name === 'xl'"
@@ -331,27 +331,29 @@
           rounded
           color="secondary"
           :small="$vuetify.breakpoint.name === 'sm' || $vuetify.breakpoint.name === 'xs'"
+          @click="abrirJenela('/cadastro')"
         >
-          CADASTRE - SE
+          CADASTRE-SE
         </v-btn>
       </v-col>
     </v-row>
     <v-row
       id="perfis"
-      class="pa-0 ma-0 d-flex justify-center"
+      class="pa-0 ma-0 d-flex justify-center "
       :style="`min-height: ${alturaTela}px;`"
     >
       <v-col
         xl="5"
         lg="5"
         md="5"
-        sm="12"
-        cols="12"
+        sm="10"
+        cols="10"
         class="pa-0 ma-0 py-7 d-flex align-center justify-center"
       >
         <v-card
           :max-width="$vuetify.breakpoint.name === 'xl' ? '60%' : $vuetify.breakpoint.name === 'lg' ? '60%' : $vuetify.breakpoint.name === 'md' ? '70%' : $vuetify.breakpoint.name === 'sm' ? '80%' : '90%'"
           color="primaryHome"
+          min-height="80%"
           class="hover-div rounded-xl"
         >
           <v-card-title class="d-flex justify-center white--text">
@@ -359,7 +361,7 @@
           </v-card-title>
 
           <v-icon
-            size="200"
+            size="170"
             class="d-flex justify-center"
             color="white"
           >
@@ -381,7 +383,9 @@
                 >
                   mdi-umbrella
                 </v-icon>
-                <b>Solicite&nbsp;</b> o serviço um banner do jeito que desejar.
+                <p>
+                  <strong>Solicite&nbsp;</strong> o serviço um banner do jeito que desejar.
+                </p>
               </v-col>
               <v-col
                 cols="12"
@@ -394,7 +398,9 @@
                 >
                   mdi-umbrella
                 </v-icon>
-                <b>Escolha&nbsp;</b> como quer a sua arte em detalhes.
+                <p>
+                  <b>Escolha&nbsp;</b> como quer a sua arte em detalhes.
+                </p>
               </v-col>
               <v-col
                 cols="12"
@@ -407,7 +413,9 @@
                 >
                   mdi-umbrella
                 </v-icon>
-                <b>Tenha&nbsp;</b> facilidade e agilidade no processo de obter seu design perfeito.
+                <p>
+                  <b>Tenha&nbsp;</b> facilidade e agilidade no processo de obter seu design perfeito.
+                </p>
               </v-col>
               <v-col
                 cols="12"
@@ -417,8 +425,9 @@
                   rounded
                   :small="$vuetify.breakpoint.name === 'sm' || $vuetify.breakpoint.name === 'xs'"
                   color="secondary"
+                  @click="abrirJenela('/cadastro')"
                 >
-                  Cadastre - se como cliente!
+                  Cadastre-se como cliente!
                 </v-btn>
               </v-col>
             </v-row>
@@ -429,13 +438,14 @@
         xl="5"
         lg="5"
         md="5"
-        sm="12"
-        cols="12"
+        sm="10"
+        cols="10"
         class="pa-0 ma-0 py-7 d-flex align-center justify-center"
       >
         <v-card
           :max-width="$vuetify.breakpoint.name === 'xl' ? '60%' : $vuetify.breakpoint.name === 'lg' ? '60%' : $vuetify.breakpoint.name === 'md' ? '70%' : $vuetify.breakpoint.name === 'sm' ? '80%' : '90%'"
           color="secondaryHome"
+          min-height="80%"
           class="hover-div rounded-xl"
         >
           <v-card-title class="d-flex justify-center white--text">
@@ -443,7 +453,7 @@
           </v-card-title>
 
           <v-icon
-            size="200"
+            size="170"
             class="d-flex justify-center"
             color="white"
           >
@@ -456,7 +466,7 @@
             >
               <v-col
                 cols="12"
-                class="white--text d-flex flex-row"
+                class="white--text d-flex flex-row justify-start"
               >
                 <v-icon
                   class="d-flex justify-center pr-3"
@@ -465,7 +475,9 @@
                 >
                   mdi-umbrella
                 </v-icon>
-                <b>Escolha&nbsp;</b> o serviço que queria fazer.
+                <p>
+                  <strong>Escolha&nbsp;</strong> o serviço que queria fazer.
+                </p>
               </v-col>
               <v-col
                 cols="12"
@@ -478,7 +490,9 @@
                 >
                   mdi-umbrella
                 </v-icon>
-                <b>Trabalhe&nbsp;</b> que quiser, onde quiser.
+                <p>
+                  <b>Trabalhe&nbsp;</b> que quiser, onde quiser.
+                </p>
               </v-col>
               <v-col
                 cols="12"
@@ -491,7 +505,9 @@
                 >
                   mdi-umbrella
                 </v-icon>
-                <b>Seja&nbsp;</b> seu próprio chefe.
+                <p>
+                  <b>Seja&nbsp;</b> seu próprio chefe.
+                </p>
               </v-col>
               <v-col
                 cols="12"
@@ -501,8 +517,9 @@
                   rounded
                   :small="$vuetify.breakpoint.name === 'sm' || $vuetify.breakpoint.name === 'xs'"
                   color="secondary"
+                  @click="abrirJenela('/cadastro')"
                 >
-                  Cadastre - se como designer!
+                  Cadastre-se como designer!
                 </v-btn>
               </v-col>
             </v-row>
@@ -690,7 +707,7 @@
             'font-size': $vuetify.breakpoint.smAndDown ? '15px' : $vuetify.breakpoint.mdAndDown ? '20px' : '30px'
           }"
         >
-          Faça um banner para uma promoção ou quando for o dia das mães... <br>
+          Faça um banner para uma promoção ou para datas comemorativas... <br>
           Com a Umbrella designer a criatividade é o limite.
         </span>
       </v-col>
@@ -1083,6 +1100,19 @@ export default {
       this.controleImagem3 += this.controleImagem3 === 4 ? -4 : 1
       this.controleImagem4 += this.controleImagem4 === 4 ? -4 : 1
     }, 6000)
+  },
+  methods: {
+    abrirJenela (tela) {
+      if (tela !== this.$router.currentRoute.path) {
+        const route = this.$router.resolve({ path: tela })
+
+        if (tela) {
+          this.$router.push(route.href)
+        }
+      } else {
+        window.location.reload(true)
+      }
+    }
   }
 }
 </script>

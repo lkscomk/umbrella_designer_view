@@ -102,6 +102,7 @@
                           outlined
                           :type="mostrarSenha ? 'text' : 'password'"
                           @click:append="mostrarSenha = !mostrarSenha"
+                          @keypress.enter="fazerLogin()"
                         />
                       </validation-provider>
                     </v-col>
