@@ -332,13 +332,14 @@ export default {
           tipo: this.formulario.tipoUsuarioId || null
         })
         if (res && !res.erro) {
-          if (this.imagemPerfil) this.salvarImagem()
+          if (this.imagemPerfil) await this.salvarImagem()
           this.buscarPerfilUsuario()
         }
         this.loading = false
       }
     },
     async buscarImagem () {
+      this.loading = true
       const res = await this.buscarPathImagem(this.formulario.id)
       let foto = null
       if (res && !res.erro && res.checksum) {
@@ -357,6 +358,7 @@ export default {
         const imageUrl = URL.createObjectURL(blob)
         this.imagemPerfil = imageUrl
       }
+      this.loading = false
     },
     async salvarImagem () {
       const form = new FormData()
