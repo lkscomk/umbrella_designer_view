@@ -469,7 +469,7 @@ export default {
     },
     encontrarProximoItem (sequencia) {
       const valoresItem = sequencia.map((obj) => obj.item)
-      const maiorItem = Math.max(...valoresItem)
+      const maiorItem = valoresItem && valoresItem.length ? Math.max(...valoresItem) : 0
 
       const proximoItem = maiorItem + 1
 

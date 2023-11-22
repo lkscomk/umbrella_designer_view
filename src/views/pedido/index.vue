@@ -4,6 +4,7 @@
     subtitulo="Fazer pedido"
     titulo="Pedido"
   >
+  {{ formulario }}
     <v-main>
       <v-container
         fluid
@@ -32,9 +33,11 @@
             class="d-flex"
             cols="4"
           >
-            <v-select
+            <v-autocomplete
               v-model="formulario.tipo"
-              :items="items"
+              :items="dropdownTiposPedidos"
+              item-value="id"
+              item-text="descricao"
               label="Tipo*"
               outlined
               hide-details
@@ -47,9 +50,21 @@
             <v-text-field
               v-model="formulario.corPrimaria"
               label="Cor primária"
+              append-icon="mdi-eye"
               outlined
               requerid
               hide-details
+              @click:append="modalCorUm = true"
+              />
+            </v-col>
+            <v-col
+              class="d-flex align-center justify-start ma-0 pa-0"
+              cols="1"
+            >
+            <v-card
+              :color="formulario.corPrimaria"
+              width="40"
+              height="40"
             />
           </v-col>
           <v-col
@@ -59,9 +74,21 @@
             <v-text-field
               v-model="formulario.corSecundaria"
               label="Cor Secundária"
+              append-icon="mdi-eye"
               outlined
               requerid
               hide-details
+              @click:append="modalCorDois = true"
+            />
+          </v-col>
+          <v-col
+              class="d-flex align-center justify-start ma-0 pa-0"
+              cols="1"
+            >
+            <v-card
+              :color="formulario.corSecundaria"
+              width="40"
+              height="40"
             />
           </v-col>
           <v-col
@@ -72,6 +99,7 @@
               color="primary"
               class="white--text"
               elevation="2"
+              disabled
               large
             >
               Mais cores
@@ -151,6 +179,96 @@
         </v-row>
       </v-container>
     </v-main>
+    <v-dialog
+      v-model="modalCorUm"
+      width="350"
+    >
+      <v-card>
+        <v-toolbar
+          :class="$vuetify.theme.dark ? '' : 'grey--text text--darken-2'"
+          :color="$vuetify.theme.dark ? 'accent' : 'white'"
+          class="font-weight-bold"
+          flat
+          height="40"
+        >
+          <v-btn
+            color="error"
+            data-cy="btnFechar"
+            icon
+            small
+            title="Voltar"
+            @click="modalCorUm = false"
+          >
+            <v-icon dark>
+              mdi-chevron-left
+            </v-icon>
+          </v-btn>
+          <v-toolbar-title class="px-2">
+            Escolher Cor Primaria
+          </v-toolbar-title>
+
+          <v-spacer />
+
+        </v-toolbar>
+        <v-card-text class="d-flex justify-center">
+        <v-color-picker v-model="corPrimariaRetorno"></v-color-picker>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            color="success"
+            @click="modalCorUm = false"
+          >
+            Ok
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog
+      v-model="modalCorDois"
+      width="350"
+    >
+      <v-card>
+        <v-toolbar
+        :class="$vuetify.theme.dark ? '' : 'grey--text text--darken-2'"
+        :color="$vuetify.theme.dark ? 'accent' : 'white'"
+        class="font-weight-bold"
+        flat
+        height="40"
+      >
+        <v-btn
+          color="error"
+          data-cy="btnFechar"
+          icon
+          small
+          title="Voltar"
+          @click="modalCorDois = false"
+        >
+          <v-icon dark>
+            mdi-chevron-left
+          </v-icon>
+        </v-btn>
+          <v-toolbar-title class="px-2">
+            Escolher Cor Secundaria
+          </v-toolbar-title>
+
+          <v-spacer />
+
+        </v-toolbar>
+        <v-card-text class="d-flex justify-center">
+          <v-color-picker v-model="corSecundariaRetorno"></v-color-picker>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            color="success"
+            @click="modalCorDois = false"
+          >
+            Ok
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </pagina>
 </template>
 <style scoped>
@@ -160,14 +278,15 @@
 }
 </style>
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
   name: 'Pedido',
   data () {
     return {
-      items: null,
       modal: false,
       loading: false,
+      modalCorDois: false,
+      modalCorUm: false,
       Pedido: window.atob(localStorage.getItem('umbrella:pedido')),
       formulario: {
         titulo: null,
@@ -179,13 +298,31 @@ export default {
         logotipo: null,
         referencia: null,
         redeSocialReferencia: null
-      }
+      },
+      corPrimariaRetorno: null,
+      corSecundariaRetorno: null
     }
+  },
+  computed: {
+    ...mapState('pedido', [
+      'dropdownTiposPedidos'
+    ])
+  },
+  watch: {
+    corPrimariaRetorno (value) {
+      if (value) this.formulario.corPrimaria = value.hex
+    },
+    corSecundariaRetorno (value) {
+      if (value) this.formulario.corSecundaria = value.hex
+    }
+  },
+  async created () {
+    await this.buscarDropdownTiposPedidos(5) // tipos de pedido
   },
   methods: {
     ...mapActions('pedido', [
       'salvarPedido',
-      'buscarDropdownTiposUsuarios'
+      'buscarDropdownTiposPedidos'
     ]),
     async salvar () {
       this.loading = true
