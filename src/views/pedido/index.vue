@@ -4,7 +4,6 @@
     subtitulo="Fazer pedido"
     titulo="Pedido"
   >
-  {{ formulario }}
     <v-main>
       <v-container
         fluid
