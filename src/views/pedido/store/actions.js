@@ -74,3 +74,27 @@ export const salvarPedido = async ({ commit }, dados) => {
 //     return null
 //   }
 // }
+
+export const buscarPathImagem = async ({ commit }, id) => {
+  try {
+    const res = await axios.get('/anexos/usuario/' + id)
+
+    return res.data
+  } catch (error) {
+    return null
+  }
+}
+
+export const salvarImagemUsuario = async ({ commit }, dados) => {
+  try {
+    const res = await axios.post('/anexos', dados, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+
+    return res.data
+  } catch (error) {
+    return null
+  }
+}

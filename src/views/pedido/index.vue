@@ -4,180 +4,205 @@
     subtitulo="Fazer pedido"
     titulo="Pedido"
   >
-    <v-main>
-      <v-container
-        fluid
-        class="d-flex justify-center"
-      >
-        <v-row>
-          <v-col cols="4">
-            <v-text-field
-              v-model="formulario.titulo"
-              label="Titúlo*"
-              outlined
-              requerid
-              hide-details
-            />
-          </v-col>
-          <v-col cols="4">
-            <v-text-field
-              v-model="formulario.subtitulo"
-              label="Subtitúlo*"
-              outlined
-              requerid
-              hide-details
-            />
-          </v-col>
-          <v-col
-            class="d-flex"
-            cols="4"
+    <v-container
+      fluid
+      class="d-flex justify-center"
+    >
+      <v-row dense>
+        <v-col cols="4">
+          <v-text-field
+            v-model="formulario.titulo"
+            label="Titúlo*"
+            outlined
+            dense
+            requerid
+            hide-details
+          />
+        </v-col>
+        <v-col cols="4">
+          <v-text-field
+            v-model="formulario.subtitulo"
+            label="Subtitúlo*"
+            outlined
+            dense
+            requerid
+            hide-details
+          />
+        </v-col>
+        <v-col
+          class="d-flex"
+          cols="4"
+        >
+          <v-autocomplete
+            v-model="formulario.tipo"
+            :items="dropdownTiposPedidos"
+            item-value="id"
+            item-text="descricao"
+            label="Tipo*"
+            outlined
+            dense
+            hide-details
+          />
+        </v-col>
+        <v-col
+          class="d-flex"
+          cols="2"
+        >
+          <v-text-field
+            v-model="formulario.corPrimaria"
+            label="Cor primária"
+            append-icon="mdi-eye"
+            outlined
+            dense
+            requerid
+            hide-details
+            @click:append="modalCorUm = true"
+          />
+        </v-col>
+        <v-col
+          class="d-flex align-center justify-center ma-0 pa-0"
+          cols="1"
+        >
+          <v-card
+            :color="formulario.corPrimaria"
+            class="elevation-0"
+            width="40"
+            height="40"
+          />
+        </v-col>
+        <v-col
+          class="d-flex"
+          cols="2"
+        >
+          <v-text-field
+            v-model="formulario.corSecundaria"
+            label="Cor Secundária"
+            append-icon="mdi-eye"
+            outlined
+            dense
+            requerid
+            hide-details
+            @click:append="modalCorDois = true"
+          />
+        </v-col>
+        <v-col
+          class="d-flex align-center justify-center ma-0 pa-0"
+          cols="1"
+        >
+          <v-card
+            :color="formulario.corSecundaria"
+            class="elevation-0"
+            width="40"
+            height="40"
+          />
+        </v-col>
+        <v-col
+          class="d-flex"
+          cols="2"
+        >
+          <v-btn
+            color="primary"
+            class="white--text"
+            elevation="2"
+            disabled
+            large
           >
-            <v-autocomplete
-              v-model="formulario.tipo"
-              :items="dropdownTiposPedidos"
-              item-value="id"
-              item-text="descricao"
-              label="Tipo*"
-              outlined
-              hide-details
-            />
-          </v-col>
-          <v-col
-            class="d-flex"
-            cols="2"
+            Mais cores
+            <v-icon
+              right
+              dark
+            >
+              mdi-plus
+            </v-icon>
+          </v-btn>
+        </v-col>
+        <v-col cols="12">
+          <v-textarea
+            v-model="formulario.outrosDetalhes"
+            outlined
+            dense
+            requerid
+            hide-details
+            label="Outros detalhes"
+          />
+        </v-col>
+        <v-col cols="4">
+          <v-file-input
+            :v-model="logotipo"
+            outlined
+            dense
+            label="Logotipo"
+            @click:clear="logotipo = null"
+            @change="handleFileSelect"
+          />
+        </v-col>
+        <v-col
+          class="d-flex justify-center ma-0 pa-0 mt-3"
+          cols="2"
+        >
+          <v-btn
+            color="primary"
+            class="white--text"
+            elevation="2"
+            small
+            block
+            @click="modalLogotipo = true"
           >
-            <v-text-field
-              v-model="formulario.corPrimaria"
-              label="Cor primária"
-              append-icon="mdi-eye"
-              outlined
-              requerid
-              hide-details
-              @click:append="modalCorUm = true"
-              />
-            </v-col>
-            <v-col
-              class="d-flex align-center justify-start ma-0 pa-0"
-              cols="1"
+            Ver Logo
+            <v-icon
+              right
+              dark
             >
-            <v-card
-              :color="formulario.corPrimaria"
-              width="40"
-              height="40"
-            />
-          </v-col>
-          <v-col
-            class="d-flex"
-            cols="2"
+              mdi-eye
+            </v-icon>
+          </v-btn>
+        </v-col>
+        <v-col cols="4">
+          <v-text-field
+            v-model="formulario.redeSocialReferencia"
+            label="Rede Sociais Referências*"
+            outlined
+            dense
+            requerid
+            hide-details
+          />
+        </v-col>
+        <v-col
+          cols="10"
+          class="d-flex justify-end"
+        >
+          <v-btn
+            depressed
+            color="error"
           >
-            <v-text-field
-              v-model="formulario.corSecundaria"
-              label="Cor Secundária"
-              append-icon="mdi-eye"
-              outlined
-              requerid
-              hide-details
-              @click:append="modalCorDois = true"
-            />
-          </v-col>
-          <v-col
-              class="d-flex align-center justify-start ma-0 pa-0"
-              cols="1"
+            <v-icon
+              right
+              dark
+              class="mr-1"
             >
-            <v-card
-              :color="formulario.corSecundaria"
-              width="40"
-              height="40"
-            />
-          </v-col>
-          <v-col
-            class="d-flex"
-            cols="2"
+              mdi-chevron-left
+            </v-icon>Voltar
+          </v-btn>
+        </v-col>
+        <v-col cols="1">
+          <v-btn
+            depressed
+            color="success"
+            @click="salvar()"
           >
-            <v-btn
-              color="primary"
-              class="white--text"
-              elevation="2"
-              disabled
-              large
+            Solicitar
+            <v-icon
+              right
+              dark
+              class="ml-1"
             >
-              Mais cores
-              <v-icon
-                right
-                dark
-              >
-                mdi-plus
-              </v-icon>
-            </v-btn>
-          </v-col>
-          <v-col cols="12">
-            <v-textarea
-              v-model="formulario.outrosDetalhes"
-              outlined
-              requerid
-              hide-details
-              label="Outros detalhes"
-            />
-          </v-col>
-          <v-col cols="4">
-            <v-file-input
-              label="Carregue seu logotipo"
-              outlined
-              hide-details="18"
-            />
-          </v-col>
-          <v-col cols="4">
-            <v-file-input
-              label="Carregue alguma referência"
-              outlined
-              hide-details="18"
-            />
-          </v-col>
-          <v-col cols="4">
-            <v-text-field
-              v-model="formulario.redeSocialReferencia"
-              label="Rede Sociais Referências*"
-              outlined
-              requerid
-              hide-details
-            />
-          </v-col>
-          <v-col
-            cols="10"
-            class="d-flex justify-end"
-          >
-            <v-btn
-              depressed
-              color="error"
-            >
-              <v-icon
-                right
-                dark
-                class="mr-1"
-              >
-                mdi-chevron-left
-              </v-icon>Voltar
-            </v-btn>
-          </v-col>
-          <v-col cols="1">
-            <v-btn
-              depressed
-              color="success"
-              @click="salvar()"
-            >
-              Solicitar
-              <v-icon
-                right
-                dark
-                class="ml-1"
-              >
-                mdi-chevron-right
-              </v-icon>
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
+              mdi-chevron-right
+            </v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
+    <!-- modal da cor um -->
     <v-dialog
       v-model="modalCorUm"
       width="350"
@@ -205,12 +230,10 @@
           <v-toolbar-title class="px-2">
             Escolher Cor Primaria
           </v-toolbar-title>
-
           <v-spacer />
-
         </v-toolbar>
         <v-card-text class="d-flex justify-center">
-        <v-color-picker v-model="corPrimariaRetorno"></v-color-picker>
+          <v-color-picker v-model="corPrimariaRetorno" />
         </v-card-text>
         <v-card-actions>
           <v-spacer />
@@ -223,45 +246,92 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <!-- modal da cor dois -->
     <v-dialog
       v-model="modalCorDois"
       width="350"
     >
       <v-card>
         <v-toolbar
-        :class="$vuetify.theme.dark ? '' : 'grey--text text--darken-2'"
-        :color="$vuetify.theme.dark ? 'accent' : 'white'"
-        class="font-weight-bold"
-        flat
-        height="40"
-      >
-        <v-btn
-          color="error"
-          data-cy="btnFechar"
-          icon
-          small
-          title="Voltar"
-          @click="modalCorDois = false"
+          :class="$vuetify.theme.dark ? '' : 'grey--text text--darken-2'"
+          :color="$vuetify.theme.dark ? 'accent' : 'white'"
+          class="font-weight-bold"
+          flat
+          height="40"
         >
-          <v-icon dark>
-            mdi-chevron-left
-          </v-icon>
-        </v-btn>
+          <v-btn
+            color="error"
+            data-cy="btnFechar"
+            icon
+            small
+            title="Voltar"
+            @click="modalCorDois = false"
+          >
+            <v-icon dark>
+              mdi-chevron-left
+            </v-icon>
+          </v-btn>
           <v-toolbar-title class="px-2">
             Escolher Cor Secundaria
           </v-toolbar-title>
-
           <v-spacer />
-
         </v-toolbar>
         <v-card-text class="d-flex justify-center">
-          <v-color-picker v-model="corSecundariaRetorno"></v-color-picker>
+          <v-color-picker v-model="corSecundariaRetorno" />
         </v-card-text>
         <v-card-actions>
           <v-spacer />
           <v-btn
             color="success"
             @click="modalCorDois = false"
+          >
+            Ok
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- modal da logo -->
+    <v-dialog
+      v-model="modalLogotipo"
+      width="350"
+    >
+      <v-card>
+        <v-toolbar
+          :class="$vuetify.theme.dark ? '' : 'grey--text text--darken-2'"
+          :color="$vuetify.theme.dark ? 'accent' : 'white'"
+          class="font-weight-bold"
+          flat
+          height="40"
+        >
+          <v-btn
+            color="error"
+            data-cy="btnFechar"
+            icon
+            small
+            title="Voltar"
+            @click="modalLogotipo = false"
+          >
+            <v-icon dark>
+              mdi-chevron-left
+            </v-icon>
+          </v-btn>
+          <v-toolbar-title class="px-2">
+            Escolher Cor Secundaria
+          </v-toolbar-title>
+          <v-spacer />
+        </v-toolbar>
+        <v-card-text class="d-flex justify-center">
+          <v-img
+            v-if="logotipo"
+            :src="logotipo"
+            alt="Profile Image"
+          />
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            color="success"
+            @click="modalLogotipo = false"
           >
             Ok
           </v-btn>
@@ -278,6 +348,7 @@
 </style>
 <script>
 import { mapActions, mapState } from 'vuex'
+
 export default {
   name: 'Pedido',
   data () {
@@ -286,6 +357,7 @@ export default {
       loading: false,
       modalCorDois: false,
       modalCorUm: false,
+      modalLogotipo: false,
       Pedido: window.atob(localStorage.getItem('umbrella:pedido')),
       formulario: {
         titulo: null,
@@ -299,7 +371,9 @@ export default {
         redeSocialReferencia: null
       },
       corPrimariaRetorno: null,
-      corSecundariaRetorno: null
+      corSecundariaRetorno: null,
+      logotipo: null,
+      selectedFile: null
     }
   },
   computed: {
@@ -321,7 +395,11 @@ export default {
   methods: {
     ...mapActions('pedido', [
       'salvarPedido',
-      'buscarDropdownTiposPedidos'
+      'buscarDropdownTiposPedidos',
+      'salvarImagemUsuario'
+    ]),
+    ...mapActions('app', [
+      'buscarPathImagem'
     ]),
     async salvar () {
       this.loading = true
@@ -348,6 +426,20 @@ export default {
       } else {
         window.location.reload(true)
       }
+    },
+    async salvarImagem () {
+      const form = new FormData()
+      form.append('tabela', 'pedido')
+      form.append('tabela_id', this.formulario.id)
+      form.append('file', this.selectedFile)
+
+      await this.salvarImagemPedido(form)
+    },
+    openFilePicker () {
+      this.$refs.fileInput.click()
+    },
+    handleFileSelect (file) {
+      this.logotipo = URL.createObjectURL(file) // Define logotipo como URL do arquivo selecionado
     }
   }
 }
