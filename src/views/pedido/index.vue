@@ -126,7 +126,7 @@
             label="Outros detalhes"
           />
         </v-col>
-        <v-col cols="4">
+        <v-col cols="3">
           <v-file-input
             :v-model="logotipo"
             outlined
@@ -137,25 +137,68 @@
           />
         </v-col>
         <v-col
-          class="d-flex justify-center ma-0 pa-0 mt-3"
-          cols="2"
+          class="d-flex ma-0 pa-0 mt-3"
+          cols="1"
         >
-          <v-btn
-            color="primary"
-            class="white--text"
-            elevation="2"
-            small
-            block
-            @click="modalLogotipo = true"
-          >
-            Ver Logo
-            <v-icon
-              right
-              dark
+          <v-col
+              class="d-flex ma-0 pa-0"
+              cols="1"
             >
-              mdi-eye
-            </v-icon>
-          </v-btn>
+            <v-btn
+              color="primary"
+              class="white--text ma-0 pa-0 pr-3"
+              elevation="2"
+              width="40"
+              height="30"
+              small
+              block
+              @click="modalLogotipo = true"
+            >
+              <v-icon
+                right
+                dark
+              >
+                mdi-eye
+              </v-icon>
+            </v-btn>
+          </v-col>
+        </v-col>
+        <v-col cols="3">
+          <v-file-input
+            :v-model="referencia"
+            outlined
+            dense
+            label="Refêrencia"
+            @click:clear="referencia = null"
+            @change="handleFileSelectR"
+          />
+        </v-col>
+        <v-col
+          class="d-flex  ma-0 pa-0 mt-3"
+          cols="1"
+        >
+          <v-col
+            class="d-flex ma-0 pa-0"
+            cols="1"
+          >
+            <v-btn
+              color="primary"
+              class="white--text ma-0 pa-0 pr-3"
+              elevation="2"
+              width="40"
+              height="30"
+              small
+              block
+              @click="modalReferencia = true"
+            >
+              <v-icon
+                right
+                dark
+              >
+                mdi-eye
+              </v-icon>
+            </v-btn>
+          </v-col>
         </v-col>
         <v-col cols="4">
           <v-text-field
@@ -316,7 +359,7 @@
             </v-icon>
           </v-btn>
           <v-toolbar-title class="px-2">
-            Escolher Cor Secundaria
+            Logotipo inserida
           </v-toolbar-title>
           <v-spacer />
         </v-toolbar>
@@ -332,6 +375,54 @@
           <v-btn
             color="success"
             @click="modalLogotipo = false"
+          >
+            Ok
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!--Modal Referencias -->
+    <v-dialog
+      v-model="modalReferencia"
+      width="350"
+    >
+      <v-card>
+        <v-toolbar
+          :class="$vuetify.theme.dark ? '' : 'grey--text text--darken-2'"
+          :color="$vuetify.theme.dark ? 'accent' : 'white'"
+          class="font-weight-bold"
+          flat
+          height="40"
+        >
+          <v-btn
+            color="error"
+            data-cy="btnFechar"
+            icon
+            small
+            title="Voltar"
+            @click="modalReferencia = false"
+          >
+            <v-icon dark>
+              mdi-chevron-left
+            </v-icon>
+          </v-btn>
+          <v-toolbar-title class="px-2">
+            Referência inserida
+          </v-toolbar-title>
+          <v-spacer />
+        </v-toolbar>
+        <v-card-text class="d-flex justify-center">
+          <v-img
+            v-if="referencia"
+            :src="referencia"
+            alt="Profile Image"
+          />
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            color="success"
+            @click="modalReferencia = false"
           >
             Ok
           </v-btn>
@@ -358,6 +449,7 @@ export default {
       modalCorDois: false,
       modalCorUm: false,
       modalLogotipo: false,
+      modalReferencia: false,
       Pedido: window.atob(localStorage.getItem('umbrella:pedido')),
       formulario: {
         titulo: null,
@@ -373,7 +465,8 @@ export default {
       corPrimariaRetorno: null,
       corSecundariaRetorno: null,
       logotipo: null,
-      selectedFile: null
+      selectedFile: null,
+      referencia: null
     }
   },
   computed: {
@@ -396,7 +489,7 @@ export default {
     ...mapActions('pedido', [
       'salvarPedido',
       'buscarDropdownTiposPedidos',
-      'salvarImagemUsuario'
+      'salvarImagem'
     ]),
     ...mapActions('app', [
       'buscarPathImagem'
@@ -439,7 +532,10 @@ export default {
       this.$refs.fileInput.click()
     },
     handleFileSelect (file) {
-      this.logotipo = URL.createObjectURL(file) // Define logotipo como URL do arquivo selecionado
+      this.name = URL.createObjectURL(file) // Define logotipo como URL do arquivo selecionado
+    },
+    handleFileSelectR (file) {
+      this.referencia = URL.createObjectURL(file)
     }
   }
 }
