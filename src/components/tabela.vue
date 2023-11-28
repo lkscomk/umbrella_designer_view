@@ -25,15 +25,15 @@
           />
           <v-btn
             v-if="excluir"
-            :color="$vuetify.theme.dark ? 'white' : 'primary'"
+            :color="$vuetify.theme.dark ? 'white' : 'error'"
             class="botao-acao-tabela"
             data-cy="btnTableExibir"
             icon
-            title="Exibir registro"
+            title="Ecluir registro"
             @click="$emit('excluir', item)"
           >
             <v-icon size="20">
-              mdi-eye
+              mdi-delete
             </v-icon>
           </v-btn>
           <v-btn

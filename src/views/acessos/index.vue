@@ -235,9 +235,8 @@
                   dense
                   item-value="item"
                   item-text="descricao"
-                  label="Grupo"
+                  label="Tipo Usuário"
                   outlined
-                  @change="listarRegistro()"
                 />
               </v-col>
               <v-col cols="3">
@@ -256,7 +255,7 @@
                   :colunas="colunasTipo"
                   :registros="registrosTipo"
                   excluir
-                  @exibir="exibirRegistro($event)"
+                  @excluir="excluirRegistroTipos($event.id)"
                 />
               </v-col>
             </v-row>
@@ -464,6 +463,7 @@ export default {
           this.modal = false
           this.resetFormulario()
           this.listarRegistro()
+          await this.buscarAcessos(this.perfil)
         }
         this.loading = false
       }
@@ -475,6 +475,7 @@ export default {
         this.modal = false
         this.resetFormulario()
         this.listarRegistro()
+        await this.buscarAcessos(this.perfil)
       }
       this.loading = false
     },
@@ -506,7 +507,8 @@ export default {
       this.loading = true
       const res = await this.excluirTiposAcesso(id)
       if (res && !res.erro) {
-        this.listarRegistro()
+        this.listarRegistroTipos()
+        await this.buscarAcessos(this.perfil)
       }
       this.loading = false
     },

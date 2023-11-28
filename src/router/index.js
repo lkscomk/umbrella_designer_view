@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -123,6 +122,16 @@ const routes = [
         next('/login')
       }
     }
+  },
+  {
+    path: '*',
+    component: () => import('@/views/error/404')
+  },
+  {
+    path: '/proibido',
+    name: 'Proibido',
+    component: () => import('@/views/error/403'),
+    beforeEnter: (to, from, next) => localStorage.getItem('umbrella:token') ? next() : next('/login')
   }
 ]
 
