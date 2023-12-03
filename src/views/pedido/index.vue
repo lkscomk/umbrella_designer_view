@@ -141,9 +141,9 @@
           cols="1"
         >
           <v-col
-              class="d-flex ma-0 pa-0"
-              cols="1"
-            >
+            class="d-flex ma-0 pa-0"
+            cols="1"
+          >
             <v-btn
               color="primary"
               class="white--text ma-0 pa-0 pr-3"
