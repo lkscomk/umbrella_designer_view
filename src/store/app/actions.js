@@ -26,6 +26,7 @@ export const buscarAcessos = async ({ commit }, id) => {
     const res = await axios.get('/sistema/acessos_tela/' + id)
 
     if (!res.data.erro) {
+      localStorage.setItem('umbrella:acessos_usuario', window.btoa(res.data))
       commit('acessos_usuario', res.data)
     }
 

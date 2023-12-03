@@ -24,6 +24,19 @@
             name="acao"
           />
           <v-btn
+            v-if="excluir"
+            :color="$vuetify.theme.dark ? 'white' : 'error'"
+            class="botao-acao-tabela"
+            data-cy="btnTableExibir"
+            icon
+            title="Ecluir registro"
+            @click="$emit('excluir', item)"
+          >
+            <v-icon size="20">
+              mdi-delete
+            </v-icon>
+          </v-btn>
+          <v-btn
             v-if="exibir"
             :color="$vuetify.theme.dark ? 'white' : 'primary'"
             class="botao-acao-tabela"
@@ -50,6 +63,10 @@ export default {
       type: Array
     },
     exibir: {
+      default: false,
+      type: Boolean
+    },
+    excluir: {
       default: false,
       type: Boolean
     },
