@@ -46,7 +46,7 @@ Axios.interceptors.response.use((response) => {
     Vue.prototype.$notificacao('Requisição não encontrada!', 'erro')
     return Promise.reject(error)
   } else if (error.response.status === 500) {
-    Vue.prototype.$notificacao(error.response.data.erro || error.response.data.error, 'erro', true)
+    Vue.prototype.$notificacao(error.response.data.erro || error.response.data.error || 'Erro no servidor, tente novamente mais tarde. Se presistir, contate alguém da equipe!', 'erro', true)
   } else {
     Vue.prototype.$notificacao('Erro ao processar requisição. Tente novamente!', 'erro')
   }

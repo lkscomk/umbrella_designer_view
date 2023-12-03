@@ -40,7 +40,9 @@
                 :src="imagemPerfil"
                 alt="Profile Image"
               />
-              <div v-else>{{ nome.substring(0,2) }}</div>
+              <div v-else>
+                {{ nome.substring(0,2) }}
+              </div>
             </v-avatar>
           </template>
 
