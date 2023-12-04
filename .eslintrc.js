@@ -11,7 +11,7 @@ module.exports = {
     ecmaVersion: 2020
   },
   rules: {
-    'no-console': 'error',
+    'no-console': 'off',
     'no-debugger': 'error',
     'vue/eqeqeq': 'error',
     'vue/no-irregular-whitespace': 'error',
