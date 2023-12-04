@@ -14,18 +14,17 @@ export const buscarDropdownTiposPedidos = async ({ commit }, grupo) => {
   }
 }
 
-// export const salvarPedido = async ({ commit }, dados) => {
-//   try {
-//     const res = await axios.post('/pedido', dados)
-//     return res.data
-//   } catch (error) {
-//     return null
-//   }
-// }
+export const salvar = async ({ commit }, dados) => {
+  try {
+    const res = await axios.post('/pedido', dados)
+    return res.data
+  } catch (error) {
+    return null
+  }
+}
 
 export const listar = async ({ commit }, dados) => {
   try {
-    print(dados)
     const res = await axios.get('/pedido', {
       params: dados
     })
@@ -33,48 +32,31 @@ export const listar = async ({ commit }, dados) => {
     if (!res.data.erro) {
       commit('setRegistros', res.data)
     }
-    print(res)
     return res.data
   } catch (error) {
     return null
   }
 }
 
-// export const exibir = async ({ commit }, id) => {
-//   try {
-//     const res = await axios.get('/pedido/' + id)
+export const exibir = async ({ commit }, id) => {
+  try {
+    const res = await axios.get('/pedido/' + id)
 
-//     return res.data
-//   } catch (error) {
-//     return null
-//   }
-// }
+    return res.data
+  } catch (error) {
+    return null
+  }
+}
 
-// export const listarRelacionamento = async ({ commit }, filtros) => {
-//   try {
-//     const res = await axios.get('/pedido', {
-//       params: filtros
-//     })
+export const editar = async ({ commit }, dados) => {
+  try {
+    const res = await axios.put('/pedido/' + dados.id, dados)
 
-//     if (!res.data.erro) {
-//       commit('setRegistrosRelacionamento', res.data)
-//     }
-
-//     return res.data
-//   } catch (error) {
-//     return null
-//   }
-// }
-
-// export const editar = async ({ commit }, dados) => {
-//   try {
-//     const res = await axios.put('/pedido/' + dados.id, dados)
-
-//     return res.data
-//   } catch (error) {
-//     return null
-//   }
-// }
+    return res.data
+  } catch (error) {
+    return null
+  }
+}
 
 export const buscarPathImagem = async ({ commit }, id) => {
   try {
@@ -86,13 +68,22 @@ export const buscarPathImagem = async ({ commit }, id) => {
   }
 }
 
-export const salvarImagemUsuario = async ({ commit }, dados) => {
+export const salvarImagemPedido = async ({ commit }, dados) => {
   try {
     const res = await axios.post('/anexos', dados, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     })
+
+    return res.data
+  } catch (error) {
+    return null
+  }
+}
+export const excluir = async ({ commit }, id) => {
+  try {
+    const res = await axios.delete('/pedido/' + id)
 
     return res.data
   } catch (error) {

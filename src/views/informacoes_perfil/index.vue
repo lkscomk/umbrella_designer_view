@@ -363,6 +363,7 @@ export default {
     async salvarImagem () {
       const form = new FormData()
       form.append('tabela', 'usuario')
+      form.append('tipo_anexo_id', 3) // tipo de anexo - imagem perfil usuaril
       form.append('tabela_id', this.formulario.id)
       form.append('file', this.selectedFile)
 

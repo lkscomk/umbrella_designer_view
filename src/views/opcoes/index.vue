@@ -103,42 +103,42 @@
           <v-toolbar-title class="px-2">
             {{ controle.editar ? 'Editar Registro' : controle.inserir ? 'Adicionar Registro' : 'Exibir Registro' }}
           </v-toolbar-title>
-        </v-toolbar>
 
-        <v-spacer />
+          <v-spacer />
 
-        <v-menu
-          offset-y
-          left
-        >
-          <template v-slot:activator="{ on }">
-            <v-btn
-              id="pg-btn-mais-opcoes"
-              class="mx-0"
-              small
-              icon
-              v-on="on"
-            >
-              <v-icon>
-                mdi-dots-vertical
-              </v-icon>
-            </v-btn>
-          </template>
-          <v-list>
-            <v-list-item @click="excluirRegistro()">
-              <v-list-item-icon class="mr-3">
-                <v-icon color="error'">
-                  mdi-cancel
+          <v-menu
+            offset-y
+            left
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                id="pg-btn-mais-opcoes"
+                class="mx-0"
+                small
+                icon
+                v-on="on"
+              >
+                <v-icon>
+                  mdi-dots-vertical
                 </v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>
-                  Excluir
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-menu>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item @click="excluirRegistro()">
+                <v-list-item-icon class="mr-3">
+                  <v-icon color="error'">
+                    mdi-cancel
+                  </v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>
+                    Excluir
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-toolbar>
         <v-card-text class="ma-0 pa-0 px-2">
           <v-form @submit.prevent="''">
             <validation-observer ref="observer">

@@ -1,3 +1,4 @@
 export default {
-  registros: []
+  registros: [],
+  dropdownTiposPedidos: []
 }
