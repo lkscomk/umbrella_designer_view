@@ -45,9 +45,9 @@ export const logout = async ({ commit }) => {
   delete axios.defaults.headers.Authorization
 }
 
-export const buscarPathImagem = async ({ commit }, id) => {
+export const buscarPathImagem = async ({ commit }, dados) => {
   try {
-    const res = await axios.get('/anexos/usuario/' + id)
+    const res = await axios.get('/anexos/usuario/' + dados.tipo + '/' + dados.id)
 
     return res.data
   } catch (error) {
