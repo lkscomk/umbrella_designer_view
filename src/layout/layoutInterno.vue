@@ -184,7 +184,10 @@ export default {
       'buscarPathImagem'
     ]),
     async buscarImagem () {
-      const res = await this.buscarPathImagem(this.perfil)
+      const res = await this.buscarPathImagem({
+        id: this.perfil,
+        tipo: 3 // tipo anexo imagem perfil
+      })
       let foto = null
       if (res && !res.erro && res.checksum) {
         await axios
